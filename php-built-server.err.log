@@ -1,0 +1,318 @@
+[Tue Jun  2 15:56:40 2026] PHP 8.4.0 Development Server (http://127.0.0.1:8000) started
+[Tue Jun  2 15:56:42 2026] 127.0.0.1:62627 Accepted
+[Tue Jun  2 15:56:42 2026] 127.0.0.1:62627 [200]: GET /assets/argon-dashboard.css?v=verify
+[Tue Jun  2 15:56:42 2026] 127.0.0.1:62627 Closing
+[Tue Jun  2 15:56:59 2026] 127.0.0.1:64667 Accepted
+[Tue Jun  2 15:56:59 2026] 127.0.0.1:64667 [200]: GET /assets/argon-dashboard.css?v=verify
+[Tue Jun  2 15:56:59 2026] 127.0.0.1:64667 Closing
+[Tue Jun  2 15:57:26 2026] 127.0.0.1:52978 Accepted
+[Tue Jun  2 15:57:27 2026] 127.0.0.1:52978 Closing
+[Tue Jun  2 15:57:27 2026] 127.0.0.1:52979 Accepted
+[Tue Jun  2 15:57:27 2026] 127.0.0.1:52979 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:56850 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:56850 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:63116 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:63116 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:63116 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:61370 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:60178 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:62821 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:61370 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:60178 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:62821 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:61370 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:60178 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:50593 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:62821 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:50593 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:50593 Closing
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:62070 Accepted
+[Tue Jun  2 15:59:45 2026] 127.0.0.1:62070 Closing
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:55720 Accepted
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:57222 Accepted
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:55720 Closing
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:57222 Closing
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:54873 Accepted
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:63413 Accepted
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:54873 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:63413 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:54873 Closing
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:63413 Closing
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:61598 Accepted
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:61598 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:46 2026] 127.0.0.1:61598 Closing
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:53267 Accepted
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:53874 Accepted
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:53267 Closing
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:53874 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:49676 Accepted
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:53874 Closing
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:49676 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:49676 Closing
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:56974 Accepted
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:56974 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:47 2026] 127.0.0.1:56974 Closing
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:59713 Accepted
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:60767 Accepted
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:59713 Closing
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:60767 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:53555 Accepted
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:53555 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:60767 Closing
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:53555 Closing
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:62105 Accepted
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:62105 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:48 2026] 127.0.0.1:62105 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:57012 Accepted
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:57012 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:54060 Accepted
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:54060 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:62796 Accepted
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:64008 Accepted
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:62796 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:64008 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:54060 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:62796 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:64008 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:57984 Accepted
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:57984 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:57984 Closing
+[Tue Jun  2 15:59:50 2026] 127.0.0.1:53516 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:53516 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:65405 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:65405 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:61299 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:60427 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:61299 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:60427 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:61299 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:60427 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:58043 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:58043 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:58043 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:52912 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:52912 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:62837 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:62837 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:62837 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:50077 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:53735 Accepted
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:50077 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:53735 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:50077 Closing
+[Tue Jun  2 15:59:51 2026] 127.0.0.1:53735 Closing
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:56302 Accepted
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:56302 Closing
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:64117 Accepted
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:64117 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:51465 Accepted
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:51465 [200]: GET /assets/argon-dashboard.css?v=1780386975
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:61390 Accepted
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:64117 Closing
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:61390 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:51465 Closing
+[Tue Jun  2 15:59:52 2026] 127.0.0.1:61390 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:52488 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:52488 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:62040 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:62040 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:62040 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:51637 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:60357 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:54918 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:51637 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:60357 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:54918 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:51637 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:60357 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:54918 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:59989 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:59989 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:59989 Closing
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:50563 Accepted
+[Tue Jun  2 16:01:23 2026] 127.0.0.1:50563 Closing
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:63050 Accepted
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:63050 Closing
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:52629 Accepted
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:52629 Closing
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:56013 Accepted
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:52418 Accepted
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:56013 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:52418 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:56013 Closing
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:52418 Closing
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:61343 Accepted
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:61343 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:24 2026] 127.0.0.1:61343 Closing
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:53894 Accepted
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:63858 Accepted
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:53894 Closing
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:63858 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:59875 Accepted
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:59875 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:63858 Closing
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:59875 Closing
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:60373 Accepted
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:60373 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:25 2026] 127.0.0.1:60373 Closing
+[Tue Jun  2 16:01:26 2026] 127.0.0.1:62598 Accepted
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:62598 Closing
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:51433 Accepted
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:51433 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:61883 Accepted
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:51433 Closing
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:61883 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:61883 Closing
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:64763 Accepted
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:64763 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:27 2026] 127.0.0.1:64763 Closing
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:55361 Accepted
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:55361 Closing
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:61541 Accepted
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:61541 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57272 Accepted
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57272 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57736 Accepted
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:61541 Closing
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:59021 Accepted
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57736 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:59021 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57272 Closing
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:57736 Closing
+[Tue Jun  2 16:01:28 2026] 127.0.0.1:59021 Closing
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:58208 Accepted
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:58208 Closing
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:54491 Accepted
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:54491 Closing
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:62704 Accepted
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:57198 Accepted
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:54012 Accepted
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:62704 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:57198 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:54012 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:62704 Closing
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:57198 Closing
+[Tue Jun  2 16:01:29 2026] 127.0.0.1:54012 Closing
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:62697 Accepted
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:62697 Closing
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60510 Accepted
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60510 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60781 Accepted
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:56043 Accepted
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60781 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60510 Closing
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:56043 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:60781 Closing
+[Tue Jun  2 16:01:30 2026] 127.0.0.1:56043 Closing
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:53818 Accepted
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:65083 Accepted
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:53818 Closing
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:65083 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:63143 Accepted
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:63143 [200]: GET /assets/argon-dashboard.css?v=1780387233
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:65083 Closing
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:51675 Accepted
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:51675 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:63143 Closing
+[Tue Jun  2 16:01:31 2026] 127.0.0.1:51675 Closing
+[Tue Jun  2 16:02:24 2026] 127.0.0.1:51701 Accepted
+[Tue Jun  2 16:02:24 2026] 127.0.0.1:51701 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:56693 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:56693 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:57238 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:57238 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:57238 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:50347 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:58544 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:50347 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:58544 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:60205 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:60205 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:50347 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:58544 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:60205 Closing
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:62625 Accepted
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:62625 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:01 2026] 127.0.0.1:62625 Closing
+[Tue Jun  2 16:03:02 2026] 127.0.0.1:54461 Accepted
+[Tue Jun  2 16:03:02 2026] 127.0.0.1:54461 Closing
+[Tue Jun  2 16:03:02 2026] 127.0.0.1:59483 Accepted
+[Tue Jun  2 16:03:02 2026] 127.0.0.1:51288 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:59483 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:51288 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:58035 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:49301 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:58035 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:49301 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:58035 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:49301 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:50299 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:50299 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:50299 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:59131 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:59131 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:64292 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:64292 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:63486 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:64292 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:63486 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:63486 Closing
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:54889 Accepted
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:54889 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:03 2026] 127.0.0.1:54889 Closing
+[Tue Jun  2 16:03:04 2026] 127.0.0.1:63856 Accepted
+[Tue Jun  2 16:03:04 2026] 127.0.0.1:62180 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:63856 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:62180 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:57375 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:62180 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:57375 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:57375 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:52699 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:52699 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:52699 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:49204 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:64554 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:49204 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:64554 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:59851 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:60848 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:58801 Accepted
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:64554 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:59851 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:60848 [200]: GET /assets/hero-farm-market.png
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:58801 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:59851 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:60848 Closing
+[Tue Jun  2 16:03:05 2026] 127.0.0.1:58801 Closing
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:49675 Accepted
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:49675 Closing
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57436 Accepted
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57436 Closing
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57830 Accepted
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57830 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57830 Closing
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:53873 Accepted
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57672 Accepted
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:53873 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57672 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:53873 Closing
+[Tue Jun  2 16:03:06 2026] 127.0.0.1:57672 Closing
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:63385 Accepted
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:61171 Accepted
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:63385 Closing
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:61171 [200]: GET /assets/app.css?v=1779966587
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:61171 Closing
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:64324 Accepted
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:52313 Accepted
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:64324 [200]: GET /assets/argon-dashboard.css?v=1780387329
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:52313 [200]: GET /assets/app.js?v=1779967230
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:64324 Closing
+[Tue Jun  2 16:03:07 2026] 127.0.0.1:52313 Closing
+[Tue Jun  2 16:03:29 2026] 127.0.0.1:52331 Accepted
+[Tue Jun  2 16:03:29 2026] 127.0.0.1:52331 [200]: GET /assets/argon-dashboard.css?v=final
+[Tue Jun  2 16:03:29 2026] 127.0.0.1:52331 Closing
+[Tue Jun  2 16:23:09 2026] 127.0.0.1:54352 Accepted
+[Tue Jun  2 16:23:09 2026] 127.0.0.1:54352 Closing
+[Tue Jun  2 16:24:56 2026] 127.0.0.1:54386 Accepted
+[Tue Jun  2 16:24:56 2026] 127.0.0.1:54386 Closing

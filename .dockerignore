@@ -1,0 +1,12 @@
+.env
+.git
+vendor
+node_modules
+storage/logs/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+database/database.sqlite
+screenshots
+*.err.log
+*.out.log
