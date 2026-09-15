@@ -3,7 +3,8 @@
     "allow": [
       "Bash(rtk git *)",
       "Bash(rtk tsc *)",
-      "Bash(rtk npm *)"
+      "Bash(rtk npm *)",
+      "Bash(rtk grep *)"
     ]
   }
 }
