@@ -245,7 +245,11 @@ function ListingSection({ kind, items, onAdd, onEdit, onRemove }: ListingSection
                 <div className="flex flex-wrap items-center gap-4">
                   <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-husk2">
                     {item.images[0] ? (
-                      <img src={item.images[0]} alt="" className="h-full w-full object-cover" />
+                      <img
+                        src={item.images[0]}
+                        alt=""
+                        className="h-full w-full object-cover transition duration-500 ease-grow group-hover:-translate-y-1 group-hover:shadow-lift"
+                      />
                     ) : (
                       <Icon size={19} className="text-canopy/60" />
                     )}

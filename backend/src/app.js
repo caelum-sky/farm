@@ -1,4 +1,3 @@
-// backend/src/app.js
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -16,17 +15,26 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-app.set('trust proxy', 1); // Render sits behind a proxy; needed for correct rate-limit IPs
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'farmhub-api',
+    message: 'FarmHub API is running'
+  });
+});
 
-app.use(helmet());
+app.set('trust proxy', 1);
+
 app.use(
   cors({
-    origin: (process.env.CORS_ORIGIN || 'http://localhost:5173').split(',').map((s) => s.trim()),
+    origin: (process.env.CORS_ORIGIN || 'http://localhost:5173')
+      .split(',')
+      .map((s) => s.trim()),
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: '1mb' }));
-app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 app.use(
   '/api',
@@ -35,26 +43,27 @@ app.use(
     max: 300,
     standardHeaders: true,
     legacyHeaders: false,
-    message: { error: 'Too many requests. Try again in a few minutes.' },
+    message: {
+      error: 'Too many requests. Try again in a few minutes.'
+    },
   })
 );
 
-// Tighter bucket on write-heavy auth endpoints
-app.use(
-  '/api/auth',
-  rateLimit({ windowMs: 15 * 60 * 1000, max: 40, standardHeaders: true, legacyHeaders: false })
-);
-
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'farmhub-api', time: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    service: 'farmhub-api',
+    time: new Date().toISOString()
+  });
 });
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/equipment', equipmentRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/rentals', rentalRoutes);
-app.use('/api', moderationRoutes); // /api/reports, /api/reviews
+app.use('/api', moderationRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.use(notFoundHandler);

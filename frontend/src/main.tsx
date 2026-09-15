@@ -9,6 +9,7 @@ import ToastViewport from '@/components/ui/ToastViewport';
 import { AuthProvider } from '@/context/AuthContext';
 import { CartProvider } from '@/context/CartContext';
 import { ToastProvider } from '@/context/ToastContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import '@/index.css';
 
 const container = document.getElementById('root');
@@ -17,16 +18,18 @@ if (!container) throw new Error('Root element is missing from index.html');
 createRoot(container).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
-        <ToastProvider>
-          <AuthProvider>
-            <CartProvider>
-              <App />
-              <ToastViewport />
-            </CartProvider>
-          </AuthProvider>
-        </ToastProvider>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <ToastProvider>
+            <AuthProvider>
+              <CartProvider>
+                <App />
+                <ToastViewport />
+              </CartProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </BrowserRouter>
+      </ThemeProvider>
     </ErrorBoundary>
   </StrictMode>
 );

@@ -14,6 +14,7 @@
 
   body {
     @apply bg-husk text-soil dark:bg-soil dark:text-husk font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
     /* Stops iOS Safari's rubber-band scroll from revealing a white gutter
        under the dark footer. */
     overscroll-behavior-y: none;

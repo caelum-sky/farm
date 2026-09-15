@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, ShoppingBasket, X } from 'lucide-react';
+import { Menu, ShoppingBasket, X, Sun, Moon, Monitor } from 'lucide-react';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
+import { useTheme, ThemeMode } from '@/context/ThemeContext';
 
 const PUBLIC_LINKS = [
   { to: '/market', label: 'Produce' },
@@ -96,6 +97,28 @@ export default function Navbar() {
               </NavLink>
             )
           )}
+          {/* Theme toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                const modeOrder: ThemeMode[] = ['system', 'light', 'dark'];
+                const currentIndex = modeOrder.indexOf(mode);
+                const nextIndex = (currentIndex + 1) % modeOrder.length;
+                setMode(modeOrder[nextIndex]);
+              }}
+              aria-label="Toggle theme"
+              className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
+            >
+              {mode === 'system' ? (
+                <Monitor size={20} className="text-soil/80 dark:text-husk/80" />
+              ) : mode === 'light' ? (
+                <Sun size={20} className="text-canopy dark:text-husk" />
+              ) : (
+                <Moon size={20} className="text-canopy dark:text-husk" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2">
@@ -185,6 +208,29 @@ export default function Navbar() {
               className="absolute inset-x-0 top-full z-10 max-h-[72dvh] overflow-y-auto border-t border-soil/10 bg-husk px-5 pb-8 pt-4 shadow-crate dark:border-husk/10 dark:bg-husk/20 lg:hidden"
             >
               <div className="flex flex-col gap-1">
+                {/* Theme toggle in mobile menu */}
+                <div className="flex items-center gap-2 px-3 py-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const modeOrder: ThemeMode[] = ['system', 'light', 'dark'];
+                      const currentIndex = modeOrder.indexOf(mode);
+                      const nextIndex = (currentIndex + 1) % modeOrder.length;
+                      setMode(modeOrder[nextIndex]);
+                    }}
+                    aria-label="Toggle theme"
+                    className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
+                  >
+                    {mode === 'system' ? (
+                      <Monitor size={20} className="text-soil/80 dark:text-husk/80" />
+                    ) : mode === 'light' ? (
+                      <Sun size={20} className="text-canopy dark:text-husk" />
+                    ) : (
+                      <Moon size={20} className="text-canopy dark:text-husk" />
+                    )}
+                  </button>
+                </div>
+
                 {PUBLIC_LINKS.map((link) => (
                   <a
                     key={link.to}
