@@ -14,20 +14,17 @@ export default function Hero() {
   const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
-  // Add defensive checks to prevent framer-motion errors
-  // Providing fallback values to prevent undefined access
-  const skyY = useTransform(scrollY, [0, 600], [0, 70]) || { y: 0 };
-  const ridgeY = useTransform(scrollY, [0, 600], [0, 140]) || { y: 0 };
-  const fieldY = useTransform(scrollY, [0, 600], [0, 220]) || { y: 0 };
-  const copyY = useTransform(scrollY, [0, 600], [0, 60]) || { y: 0 };
-
-  const still = { y: 0 };
+  // Use framer-motion transforms directly - they return MotionValues safe for style props
+  const skyY = useTransform(scrollY, [0, 600], [0, 70]);
+  const ridgeY = useTransform(scrollY, [0, 600], [0, 140]);
+  const fieldY = useTransform(scrollY, [0, 600], [0, 220]);
+  const copyY = useTransform(scrollY, [0, 600], [0, 60]);
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#EAE0D5] via-husk/70 to-husk/60">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          style={reduceMotion ? still : skyY}
+          style={reduceMotion ? { y: 0 } : skyY}
           className="absolute inset-0"
         >
           <div className="absolute right-[12%] top-24 h-56 w-56 rounded-full bg-harvest/15 blur-3xl" />
@@ -35,7 +32,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.svg
-          style={reduceMotion ? still : ridgeY}
+          style={reduceMotion ? { y: 0 } : ridgeY}
           className="absolute bottom-0 h-[36%] w-full"
           viewBox="0 0 1200 240"
           preserveAspectRatio="none"
@@ -45,7 +42,7 @@ export default function Hero() {
         </motion.svg>
 
         <motion.svg
-          style={reduceMotion ? still : fieldY}
+          style={reduceMotion ? { y: 0 } : fieldY}
           className="absolute bottom-0 h-[24%] w-full"
           viewBox="0 0 1200 200"
           preserveAspectRatio="none"
@@ -59,7 +56,7 @@ export default function Hero() {
       <FallingLeaves season={currentSeason()} density={25} className="leaf-layer" />
 
       <motion.div
-        style={reduceMotion ? still : copyY}
+        style={reduceMotion ? { y: 0 } : copyY}
         className="shell relative z-10 flex min-h-[88svh] flex-col justify-center pb-44 pt-20 sm:min-h-[92svh] sm:pb-56 sm:pt-24"
       >
         <div className="text-center mb-6">
