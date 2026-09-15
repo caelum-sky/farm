@@ -27,7 +27,8 @@ export default function SiteLayout() {
       <a href="#main-content" className="sr-only">Skip to main content</a>
       <ConfigNotice />
       <Navbar />
-      <motion.main id="main-content"
+      <motion.main
+        id="main-content"
         key={location.pathname}
         className="flex-1"
         initial={reduceMotion ? false : { opacity: 0 }}

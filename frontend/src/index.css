@@ -85,6 +85,24 @@
            dark:bg-leaf dark:hover:bg-leaf dark:hover:shadow-lift dark:text-husk;
   }
 
+  .btn-primary-enhanced {
+    @apply bg-canopy/90 hover:bg-canopy/100 text-husk/90 hover:text-husk shadow-[0_4px_12px-_rgba(30,_42,_27,_0.3)] transform-gpu hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-canopy/45
+           bg-transparent px-6 py-3 font-medium text-canopy transition duration-300 ease-grow
+           hover:border-canopy hover:bg-canopy/10 sm:px-7 sm:py-3.5
+           motion-safe:hover:scale-[1.03] motion-safe:focus-visible:scale-[1.03]
+           active:scale-100 disabled:opacity-50
+           dark:border-canopy/60 dark:hover:border-canopy/60 dark:hover:bg-canopy/20 dark:text-leaf;
+  }
+
+  .btn-outline-enhanced {
+    @apply border-canopy/70 hover:border-canopy/90 bg-canopy/5 hover:bg-canopy/10 text-canopy/90 hover:text-canopy
+           shadow-[0_2px_6px-_rgba(30,_42,_27,_0.15)] transform-gpu hover:scale-[1.01] active:scale-[0.99];
+  }
+
   .btn-outline {
     @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-canopy/45
            bg-transparent px-6 py-3 font-medium text-canopy transition duration-300 ease-grow
@@ -111,6 +129,26 @@
            focus:ring-2 focus:ring-canopy/25 disabled:bg-husk2 disabled:text-soil/50
            dark:bg-husk/20 dark:text-husk dark:placeholder:text-husk/35 dark:border-husk/20
            dark:focus:border-canopy dark:focus:ring-canopy/25 dark:disabled:bg-husk2 dark:disabled:text-husk/50;
+  }
+
+  .field-enhanced {
+    @apply px-5 py-3.5 text-lg sm:px-6 sm:py-4 focus:ring-[canopy/30] focus:border-[canopy/50];
+  }
+
+  /* Enhanced card for better visibility and reduced eye strain */
+  .card-enhanced {
+    @apply bg-white/90 backdrop-blur-sm border border-white/20 shadow-[0_8px_32px-_rgba(0,0,0,0.1)]
+           dark:bg-husk/30 dark:border-husk/40 dark:shadow-[0_8px_32px-_rgba(0,0,0,0.3)];
+  }
+
+  /* Reduced brightness sections */
+  .section-muted {
+    @apply bg-husk/50 dark:bg-soil/50;
+  }
+
+  /* Enhanced text readability */
+  .text-enhanced {
+    @apply text-soil/90 dark:text-husk/90;
   }
 
   /* Error state styling */
@@ -145,6 +183,11 @@
     @apply relative inline-block text-canopy after:absolute after:-bottom-0.5 after:left-0
            after:h-px after:w-full after:origin-right after:scale-x-100 after:bg-canopy/50
            after:transition-transform after:duration-500 hover:after:origin-left;
+  }
+
+  .link-underline-enhanced {
+    @after:bg-canopy/70 hover:after:bg-canopy/90 text-canopy/80 hover:text-canopy/90
+           after:transition-[transform,_background-color] after:duration-300
   }
 
   /* Horizontal filter rows on phones: scrollable, with the overflow snapped
