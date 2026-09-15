@@ -35,21 +35,28 @@ const allowedOrigins = (
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-console.log('Allowed CORS origins:', allowedOrigins);
-
+// Configure CORS middleware with robust origin checking
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow Postman, curl, server-to-server requests
+    // Allow requests with no origin (like Postman, curl, or server-to-server)
     if (!origin) {
       return callback(null, true);
     }
 
-    if (allowedOrigins.includes(origin)) {
+    // Normalize the origin for comparison (remove trailing slash, convert to lowercase)
+    const normalizedOrigin = origin.replace(/\/$/, '').toLowerCase();
+
+    // Check if the normalized origin matches any allowed origin
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      const normalizedAllowed = allowedOrigin.replace(/\/$/, '').toLowerCase();
+      return normalizedOrigin === normalizedAllowed;
+    });
+
+    if (isAllowed) {
       return callback(null, true);
     }
 
     console.warn(`CORS blocked origin: ${origin}`);
-
     return callback(
       new Error(`CORS policy: Origin ${origin} is not allowed`)
     );
@@ -74,7 +81,7 @@ const corsOptions = {
     'Authorization',
   ],
 
-  optionsSuccessStatus: 204,
+  optionsSuccessStatus: 204, // Important for legacy browsers
 };
 
 app.use(cors(corsOptions));
