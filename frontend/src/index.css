@@ -32,9 +32,13 @@
 
   /* Visible keyboard focus everywhere, not just where a component remembered it */
   :focus-visible {
-    outline: 2px solid theme('colors.canopy') dark:theme('colors.husk');
+    outline: 2px solid theme('colors.canopy');
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  .dark :focus-visible {
+    outline-color: theme('colors.husk');
   }
 
   ::selection {

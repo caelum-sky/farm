@@ -22,7 +22,7 @@ export default function Modal({ title, onClose, children, size = 'md' }: ModalPr
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     const previouslyFocused = document.activeElement as HTMLElement | null;
-    const focusableEl = panelRef.current?.querySelector('button, input, textarea, select, a[href]');
+    const focusableEl = panelRef.current?.querySelector('button, input, textarea, select, a[href]') as HTMLElement | null;
 focusableEl?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {

@@ -8,13 +8,13 @@ interface PageTransitionProps {
   initial?: boolean;
 }
 
-export default function PageTransition({ children, _initial }: PageTransitionProps) {
+export default function PageTransition({ children, initial }: PageTransitionProps) {
   const reduceMotion = useReducedMotion();
 
   return (
     <AnimatePresence>
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+        initial={reduceMotion ? false : (initial === false ? false : { opacity: 0, y: 10 })}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
         transition={{

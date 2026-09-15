@@ -1,8 +1,9 @@
 // frontend/src/components/dashboard/ListingFormModal.tsx
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 
 import ErrorNote from '@/components/ui/ErrorNote';
-import { FieldInput, ToggleGroup } from '@/components/ui';
+import FieldInput from '@/components/ui/FieldInput';
+import ToggleGroup from '@/components/ui/ToggleGroup';
 import ImageUploader from '@/components/ui/ImageUploader';
 import Modal from '@/components/ui/Modal';
 import { useToast } from '@/context/ToastContext';
@@ -143,8 +144,8 @@ export default function ListingFormModal({
               { value: 'supply', label: 'Supply' },
             ]}
             value={category}
-            onChange={(value) => {
-              setCategory(value);
+            onChange={(value: string | number) => {
+              setCategory(value as "produce" | "supply");
               setSubcategory(value === 'produce' ? 'vegetables' : 'fertilizer');
             }}
           />
@@ -156,18 +157,23 @@ export default function ListingFormModal({
               { value: 'sale', label: 'For sale' },
             ]}
             value={listingType}
-            onChange={setListingType}
+            onChange={(value: string | number) => {
+              setListingType(value as "rent" | "sale");
+            }}
           />
         )}
 
         <FieldInput
           label="Name"
           id="listing-name"
-          required
-          minLength={2}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        >
+          <input
+            required
+            minLength={2}
+            value={name}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+          />
+        </FieldInput>
 
         {kind === 'products' ? (
           <>
@@ -177,10 +183,11 @@ export default function ListingFormModal({
                 label="Category"
                 id="listing-sub"
                 asChild
-                value={subcategory}
-                onChange={(e) => setSubcategory(e.target.value)}
               >
-                <select>
+                <select
+                  value={subcategory}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => setSubcategory(e.target.value)}
+                >
                   {subs.map((option) => (
                     <option key={option} value={option}>
                       {humanize(option)}
@@ -193,36 +200,45 @@ export default function ListingFormModal({
               <FieldInput
                   label="Sold by"
                   id="listing-unit"
-                  required
-                  value={unit}
-                  onChange={(e) => setUnit(e.target.value)}
-                  placeholder="kg, sack, tray"
-                />
+                >
+                  <input
+                    value={unit}
+                    placeholder="kg, sack, tray"
+                    required
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setUnit(e.target.value)}
+                  />
+                </FieldInput>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <FieldInput
                   label={`Price per ${unit || 'unit'}`}
                   id="listing-price"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  inputMode="decimal"
-                  required
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
+                >
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={price}
+                    required
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)}
+                  />
+                </FieldInput>
 
               <FieldInput
                   label="Stock on hand"
                   id="listing-stock"
-                  type="number"
-                  min="0"
-                  inputMode="numeric"
-                  required
-                  value={stock}
-                  onChange={(e) => setStock(e.target.value)}
-                />
+                >
+                  <input
+                    type="number"
+                    min="0"
+                    inputMode="numeric"
+                    value={stock}
+                    required
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStock(e.target.value)}
+                  />
+                </FieldInput>
             </div>
           </>
         ) : (
@@ -232,10 +248,11 @@ export default function ListingFormModal({
                 label="Type"
                 id="equip-category"
                 asChild
-                value={equipCategory}
-                onChange={(e) => setEquipCategory(e.target.value)}
               >
-                <select>
+                <select
+                  value={equipCategory}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => setEquipCategory(e.target.value)}
+                >
                   {EQUIPMENT_CATEGORIES.map((option) => (
                     <option key={option} value={option}>
                       {humanize(option)}
@@ -249,14 +266,18 @@ export default function ListingFormModal({
               <FieldInput
                 label={listingType === 'rent' ? 'Daily rate' : 'Sale price'}
                 id="equip-price"
-                type="number"
-                min="0"
-                step="0.01"
-                inputMode="decimal"
-                required
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+              
+              >
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  required
+                  inputMode="decimal"
+                  value={price}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)}
+                />
+              </FieldInput>
             </div>
           </div>
         )}
@@ -265,16 +286,18 @@ export default function ListingFormModal({
           label="Description"
           id="listing-desc"
           asChild
-          rows={3}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder={
-            kind === 'products'
-              ? 'Variety, when it was picked, how it travels.'
-              : 'Condition, horsepower, whether an operator comes with it.'
-          }
         >
-          <textarea className="resize-none" />
+          <textarea
+            className="resize-none"
+            rows={3}
+            placeholder={
+              kind === 'products'
+                ? 'Variety, when it was picked, how it travels.'
+                : 'Condition, horsepower, whether an operator comes with it.'
+            }
+            value={description}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+          />
         </FieldInput>
 
         <div>

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 
 interface ToggleGroupProps {
   /** Label for the toggle group */

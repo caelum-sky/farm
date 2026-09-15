@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 interface FieldInputProps {
   label: string;
   id: string;
