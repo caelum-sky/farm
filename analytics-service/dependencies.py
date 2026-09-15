@@ -6,7 +6,6 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth as fb_auth
 from firebase_admin import credentials, firestore
 
-
 _bearer = HTTPBearer(auto_error=False)
 
 
