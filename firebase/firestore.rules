@@ -1,0 +1,106 @@
+// firebase/firestore.rules
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- helpers ----------------------------------------------------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function myRole() {
+      return request.auth.token.role;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && myRole() == 'admin';
+    }
+
+    function isSeller() {
+      return isSignedIn() && (myRole() == 'farmer' || myRole() == 'cooperative');
+    }
+
+    function isNotBanned() {
+      // custom claim mirrors users/{uid}.status; set by the API on ban/unban
+      return isSignedIn() && request.auth.token.status != 'banned';
+    }
+
+    function isOwner(resource) {
+      return isSignedIn() && request.auth.uid == resource.data.ownerId;
+    }
+
+    function isOwnerOnCreate() {
+      return isSignedIn() && request.auth.uid == request.resource.data.ownerId;
+    }
+
+    // ---- users --------------------------------------------------------
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      // users may edit their own profile fields, but never their own role/status
+      allow update: if isAdmin() ||
+        (isSignedIn() && request.auth.uid == userId &&
+         request.resource.data.role == resource.data.role &&
+         request.resource.data.status == resource.data.status);
+      allow delete: if isAdmin();
+    }
+
+    // ---- products (produce & supplies) ---------------------------------
+    match /products/{productId} {
+      allow read: if resource.data.status == 'active' || isAdmin() || isOwner(resource);
+      allow create: if isSeller() && isNotBanned() && isOwnerOnCreate();
+      allow update, delete: if isAdmin() || (isOwner(resource) && isNotBanned());
+    }
+
+    // ---- equipment (sale or rent) ---------------------------------------
+    match /equipment/{equipmentId} {
+      allow read: if resource.data.status == 'active' || isAdmin() || isOwner(resource);
+      allow create: if isSeller() && isNotBanned() && isOwnerOnCreate();
+      allow update, delete: if isAdmin() || (isOwner(resource) && isNotBanned());
+    }
+
+    // ---- orders (buying produce/supplies) --------------------------------
+    match /orders/{orderId} {
+      allow read: if isAdmin() ||
+        (isSignedIn() && request.auth.uid == resource.data.buyerId);
+      allow create: if isSignedIn() && isNotBanned() &&
+        request.auth.uid == request.resource.data.buyerId;
+      // buyers/sellers may only move status forward; full edits are admin-only
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---- rentals (equipment booking) --------------------------------------
+    match /rentals/{rentalId} {
+      allow read: if isAdmin() ||
+        (isSignedIn() && (request.auth.uid == resource.data.renterId ||
+                           request.auth.uid == resource.data.ownerId));
+      allow create: if isSignedIn() && isNotBanned() &&
+        request.auth.uid == request.resource.data.renterId;
+      allow update: if isAdmin() ||
+        (isSignedIn() && (request.auth.uid == resource.data.renterId ||
+                           request.auth.uid == resource.data.ownerId));
+      allow delete: if isAdmin();
+    }
+
+    // ---- reports (user-submitted moderation flags) ------------------------
+    match /reports/{reportId} {
+      allow read: if isAdmin() ||
+        (isSignedIn() && request.auth.uid == resource.data.reporterId);
+      allow create: if isSignedIn() && isNotBanned() &&
+        request.auth.uid == request.resource.data.reporterId;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---- reviews ------------------------------------------------------------
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn() && isNotBanned() &&
+        request.auth.uid == request.resource.data.authorId;
+      allow update, delete: if isAdmin() ||
+        (isSignedIn() && request.auth.uid == resource.data.authorId);
+    }
+  }
+}

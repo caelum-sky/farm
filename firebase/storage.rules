@@ -1,0 +1,36 @@
+// firebase/storage.rules
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.role == 'admin';
+    }
+
+    function isOwnPath(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isValidImage() {
+      return request.resource.size < 5 * 1024 * 1024 &&
+             request.resource.contentType.matches('image/.*');
+    }
+
+    // avatars/{uid}/...
+    match /avatars/{uid}/{fileName} {
+      allow read: if true;
+      allow write: if (isOwnPath(uid) || isAdmin()) && isValidImage();
+    }
+
+    // listings/{uid}/products/{listingId}/...   or   .../equipment/{listingId}/...
+    match /listings/{uid}/{listingKind}/{listingId}/{fileName} {
+      allow read: if true;
+      allow write: if (isOwnPath(uid) || isAdmin()) && isValidImage();
+    }
+  }
+}

@@ -1,0 +1,163 @@
+/* frontend/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps sticky-header anchors (the harvest calendar link) from landing
+       underneath the navbar. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-husk text-soil font-sans antialiased;
+    /* Stops iOS Safari's rubber-band scroll from revealing a white gutter
+       under the dark footer. */
+    overscroll-behavior-y: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible keyboard focus everywhere, not just where a component remembered it */
+  :focus-visible {
+    outline: 2px solid theme('colors.canopy');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: theme('colors.sprout');
+    color: theme('colors.soil');
+  }
+
+  /* Native controls should match the palette rather than the OS default blue. */
+  input,
+  select,
+  textarea {
+    accent-color: theme('colors.canopy');
+  }
+
+  /* iOS zooms the page when a focused input is under 16px. */
+  @media (max-width: 640px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Section rhythm in one place, so vertical spacing stays consistent and
+     scales down on phones instead of leaving huge empty bands. */
+  .section-y {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* 44px minimum hit area on every interactive control — the smallest target
+     that stays comfortable on a phone. */
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-canopy px-6 py-3
+           font-medium text-husk shadow-crate transition duration-300 ease-grow
+           hover:bg-leaf hover:shadow-lift sm:px-7 sm:py-3.5
+           motion-safe:hover:scale-[1.04] motion-safe:focus-visible:scale-[1.04]
+           active:scale-100 disabled:opacity-50 motion-safe:disabled:hover:scale-100;
+  }
+
+  .btn-outline {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-canopy/45
+           bg-transparent px-6 py-3 font-medium text-canopy transition duration-300 ease-grow
+           hover:border-canopy hover:bg-canopy/10 sm:px-7 sm:py-3.5
+           motion-safe:hover:scale-[1.03] motion-safe:focus-visible:scale-[1.03]
+           active:scale-100 disabled:opacity-50;
+  }
+
+  .btn-quiet {
+    @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-full px-4 py-2 text-sm
+           font-medium text-soil/70 transition hover:bg-soil/5 hover:text-soil;
+  }
+
+  .btn-danger {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-clay px-6 py-3
+           font-medium text-husk transition duration-300 ease-grow hover:bg-[#763019];
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-soil/15 bg-white px-4 py-3 text-soil
+           placeholder:text-soil/35 transition focus:border-canopy focus:outline-none
+           focus:ring-2 focus:ring-canopy/25 disabled:bg-husk2 disabled:text-soil/50;
+  }
+
+  .card {
+    @apply rounded-pod border border-soil/10 bg-white shadow-crate;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+  }
+
+  /* Filter pills: same shape everywhere, selected state supplied by the caller. */
+  .pill {
+    @apply inline-flex min-h-[38px] items-center rounded-full border px-4 py-2 text-sm
+           transition duration-300 ease-grow motion-safe:hover:scale-105;
+  }
+
+  .pill-on {
+    @apply border-canopy bg-canopy text-husk;
+  }
+
+  .pill-off {
+    @apply border-soil/15 bg-white text-soil/70 hover:border-canopy/40 hover:text-soil;
+  }
+
+  .link-underline {
+    @apply relative inline-block text-canopy after:absolute after:-bottom-0.5 after:left-0
+           after:h-px after:w-full after:origin-right after:scale-x-100 after:bg-canopy/50
+           after:transition-transform after:duration-500 hover:after:origin-left;
+  }
+
+  /* Horizontal filter rows on phones: scrollable, with the overflow snapped
+     so a pill never sits half-cut at the edge. */
+  .scroll-row {
+    @apply -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-row > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* Anyone who asked their OS for less motion gets a still page. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
