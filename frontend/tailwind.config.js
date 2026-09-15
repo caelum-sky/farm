@@ -13,6 +13,7 @@ export default {
       xl: '1280px',
       '2xl': '1536px',
     },
+    darkMode: 'class',
     extend: {
       colors: {
         // Palette drawn from a Mindanao farm at harvest: turned soil, canopy
@@ -26,6 +27,16 @@ export default {
         harvest: '#E0A21C',
         bark: '#7A5C3E',
         clay: '#8C3A22',
+        // Dark mode variants
+        'dark-soil': '#F8F3E6',
+        'dark-canopy': '#2F5D3A',
+        'dark-leaf': '#6FA042',
+        'dark-sprout': '#C8DDB0',
+        'dark-husk': '#1E2A1B',
+        'dark-husk2': '#EFE7D3',
+        'dark-harvest': '#E0A21C',
+        'dark-bark': '#7A5C3E',
+        'dark-clay': '#8C3A22',
       },
       fontFamily: {
         display: ['Fraunces', 'Georgia', 'serif'],

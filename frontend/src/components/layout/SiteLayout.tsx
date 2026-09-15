@@ -24,9 +24,10 @@ export default function SiteLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <a href="#main-content" className="sr-only">Skip to main content</a>
       <ConfigNotice />
       <Navbar />
-      <motion.main
+      <motion.main id="main-content"
         key={location.pathname}
         className="flex-1"
         initial={reduceMotion ? false : { opacity: 0 }}

@@ -1,6 +1,7 @@
 // frontend/src/App.tsx
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import PageTransition from '@/components/animations/PageTransition';
 
 import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import SiteLayout from '@/components/layout/SiteLayout';
@@ -31,18 +32,19 @@ const AdminTransactions = lazy(() => import('@/pages/admin/AdminTransactions'));
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<SiteLayout />}>
-        {/* Public */}
-        <Route path="/" element={<Home />} />
-        <Route path="/market" element={<Marketplace category="produce" />} />
-        <Route path="/market/:id" element={<ProductDetail />} />
-        <Route path="/supplies" element={<Marketplace category="supply" />} />
-        <Route path="/equipment" element={<EquipmentPage />} />
-        <Route path="/equipment/:id" element={<EquipmentDetail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <PageTransition>
+      <Routes>
+        <Route element={<SiteLayout />}>
+          {/* Public */}
+          <Route path="/" element={<Home />} />
+          <Route path="/market" element={<Marketplace category="produce" />} />
+          <Route path="/market/:id" element={<ProductDetail />} />
+          <Route path="/supplies" element={<Marketplace category="supply" />} />
+          <Route path="/equipment" element={<EquipmentPage />} />
+          <Route path="/equipment/:id" element={<EquipmentDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
         {/* Any signed-in member */}
         <Route element={<ProtectedRoute />}>
@@ -112,5 +114,6 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
+    </PageTransition>
   );
 }

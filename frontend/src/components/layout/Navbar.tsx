@@ -55,7 +55,7 @@ export default function Navbar() {
   };
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `text-sm transition-colors ${isActive ? 'text-canopy' : 'text-soil/70 hover:text-soil'}`;
+    `text-sm transition-colors ${isActive ? 'text-canopy dark:text-leaf' : 'text-soil/70 hover:text-soil dark:text-husk/70 dark:hover:text-husk'}`;
 
   const accountLinks = profile
     ? [
@@ -70,7 +70,7 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ease-grow ${
-        scrolled ? 'bg-husk/92 shadow-crate backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'bg-husk/92 dark:bg-soil/92 shadow-crate backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       {/* z-10 keeps the bar itself painted above the drawer's backdrop, which
@@ -81,13 +81,13 @@ export default function Navbar() {
             <path d="M26 4C13 4 6 11 6 21c0 2 .4 4 1.2 5.7l2.2-2.2C9.1 23.3 9 22.2 9 21c0-8 5.6-13 17-13Z" fill="#2F5D3A" />
             <path d="M26 4c0 13-7 20-17 20 2 2.5 5 4 8 4 7 0 11-6 11-14 0-4-1-8-2-10Z" fill="#6FA042" />
           </svg>
-          <span className="font-display text-xl text-canopy">FarmHub</span>
+          <span className="font-display text-xl text-canopy dark:text-leaf">FarmHub</span>
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
           {PUBLIC_LINKS.map((link) =>
             link.to.includes('#') ? (
-              <a key={link.to} href={link.to} className="text-sm text-soil/70 transition-colors hover:text-soil">
+              <a key={link.to} href={link.to} className="text-sm text-soil/70 transition-colors hover:text-soil dark:text-husk/70 dark:hover:text-husk">
                 {link.label}
               </a>
             ) : (
@@ -102,11 +102,11 @@ export default function Navbar() {
           <Link
             to="/cart"
             aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
-            className="relative grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5"
+            className="relative grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
           >
             <ShoppingBasket size={20} className="text-soil/80" />
             {count > 0 && (
-              <span className="absolute right-0.5 top-1 grid h-5 min-w-5 place-items-center rounded-full bg-harvest px-1 text-[11px] font-semibold text-soil">
+              <span className="absolute right-0.5 top-1 grid h-5 min-w-5 place-items-center rounded-full bg-harvest px-1 text-[11px] font-semibold text-soil dark:bg-harvest dark:text-husk">
                 {count}
               </span>
             )}
@@ -139,7 +139,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="rounded-full bg-canopy px-5 py-2.5 text-sm font-medium text-husk transition duration-300 ease-grow hover:bg-leaf motion-safe:hover:scale-105"
+                  className="rounded-full bg-canopy px-5 py-2.5 text-sm font-medium text-husk transition duration-300 ease-grow hover:bg-leaf motion-safe:hover:scale-105 dark:bg-leaf dark:hover:bg-leaf dark:text-husk"
                 >
                   Join FarmHub
                 </Link>
@@ -152,7 +152,7 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            className="grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5 lg:hidden"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -171,7 +171,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-0 cursor-default bg-soil/40 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-0 cursor-default bg-soil/40 dark:bg-husk/40 backdrop-blur-sm lg:hidden"
             />
 
             <motion.div
@@ -182,7 +182,7 @@ export default function Navbar() {
               transition={{ duration: 0.34, ease: [0.22, 0.61, 0.36, 1] }}
               /* Anchored to the header rather than a fixed offset, so a banner
                  above the nav can't push the bar underneath the drawer. */
-              className="absolute inset-x-0 top-full z-10 max-h-[72dvh] overflow-y-auto border-t border-soil/10 bg-husk px-5 pb-8 pt-4 shadow-crate lg:hidden"
+              className="absolute inset-x-0 top-full z-10 max-h-[72dvh] overflow-y-auto border-t border-soil/10 bg-husk px-5 pb-8 pt-4 shadow-crate dark:border-husk/10 dark:bg-husk/20 lg:hidden"
             >
               <div className="flex flex-col gap-1">
                 {PUBLIC_LINKS.map((link) => (
@@ -190,7 +190,7 @@ export default function Navbar() {
                     key={link.to}
                     href={link.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5"
+                    className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5 dark:text-husk/85 dark:hover:bg-husk/5"
                   >
                     {link.label}
                   </a>
@@ -205,7 +205,7 @@ export default function Navbar() {
                         key={link.to}
                         to={link.to}
                         onClick={() => setOpen(false)}
-                        className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5"
+                        className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5 dark:text-husk/85 dark:hover:bg-husk/5"
                       >
                         {link.label}
                       </Link>

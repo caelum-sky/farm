@@ -14,6 +14,11 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    env:
+      FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+      FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+      FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+      CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -60,6 +65,11 @@ jobs:
     defaults:
       run:
         working-directory: analytics-service
+    env:
+      FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+      FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+      FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+      CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -67,8 +77,8 @@ jobs:
           python-version: '3.12'
       - run: pip install -r requirements.txt
       - run: pip install ruff pytest
-      - run: ruff check . || true
-      - run: pytest || true
+      - run: ruff check .
+      - run: pytest
 
   deploy:
     name: Deploy (main only)

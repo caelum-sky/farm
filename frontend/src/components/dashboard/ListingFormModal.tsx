@@ -2,6 +2,7 @@
 import { useState, type FormEvent } from 'react';
 
 import ErrorNote from '@/components/ui/ErrorNote';
+import { FieldInput, ToggleGroup } from '@/components/ui';
 import ImageUploader from '@/components/ui/ImageUploader';
 import Modal from '@/components/ui/Modal';
 import { useToast } from '@/context/ToastContext';
@@ -135,98 +136,73 @@ export default function ListingFormModal({
     <Modal title={title} onClose={onClose} size="lg">
       <form onSubmit={submit} className="space-y-5">
         {kind === 'products' ? (
-          <div className="flex gap-2">
-            {(['produce', 'supply'] as const).map((value) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => {
-                  setCategory(value);
-                  setSubcategory(value === 'produce' ? 'vegetables' : 'fertilizer');
-                }}
-                aria-pressed={category === value}
-                className={`pill flex-1 justify-center capitalize ${
-                  category === value ? 'pill-on' : 'pill-off'
-                }`}
-              >
-                {value}
-              </button>
-            ))}
-          </div>
+          <ToggleGroup
+            label="Category"
+            options={[
+              { value: 'produce', label: 'Produce' },
+              { value: 'supply', label: 'Supply' },
+            ]}
+            value={category}
+            onChange={(value) => {
+              setCategory(value);
+              setSubcategory(value === 'produce' ? 'vegetables' : 'fertilizer');
+            }}
+          />
         ) : (
-          <div className="flex gap-2">
-            {(['rent', 'sale'] as const).map((value) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setListingType(value)}
-                aria-pressed={listingType === value}
-                className={`pill flex-1 justify-center ${
-                  listingType === value ? 'pill-on' : 'pill-off'
-                }`}
-              >
-                {value === 'rent' ? 'For rent' : 'For sale'}
-              </button>
-            ))}
-          </div>
+          <ToggleGroup
+            label="Listing Type"
+            options={[
+              { value: 'rent', label: 'For rent' },
+              { value: 'sale', label: 'For sale' },
+            ]}
+            value={listingType}
+            onChange={setListingType}
+          />
         )}
 
-        <div>
-          <label htmlFor="listing-name" className="mb-1.5 block text-sm text-soil/70">
-            Name
-          </label>
-          <input
-            id="listing-name"
-            required
-            minLength={2}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="field"
-          />
-        </div>
+        <FieldInput
+          label="Name"
+          id="listing-name"
+          required
+          minLength={2}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
         {kind === 'products' ? (
           <>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="listing-sub" className="mb-1.5 block text-sm text-soil/70">
-                  Category
-                </label>
-                <select
-                  id="listing-sub"
-                  value={subcategory}
-                  onChange={(e) => setSubcategory(e.target.value)}
-                  className="field"
-                >
+              <FieldInput
+                label="Category"
+                id="listing-sub"
+                asChild
+                value={subcategory}
+                onChange={(e) => setSubcategory(e.target.value)}
+              >
+                <select>
                   {subs.map((option) => (
                     <option key={option} value={option}>
                       {humanize(option)}
                     </option>
                   ))}
                 </select>
-              </div>
+              </FieldInput>
+            </div>
 
-              <div>
-                <label htmlFor="listing-unit" className="mb-1.5 block text-sm text-soil/70">
-                  Sold by
-                </label>
-                <input
+              <FieldInput
+                  label="Sold by"
                   id="listing-unit"
                   required
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
                   placeholder="kg, sack, tray"
-                  className="field"
                 />
-              </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label htmlFor="listing-price" className="mb-1.5 block text-sm text-soil/70">
-                  Price per {unit || 'unit'}
-                </label>
-                <input
+              <FieldInput
+                  label={`Price per ${unit || 'unit'}`}
                   id="listing-price"
                   type="number"
                   min="0"
@@ -235,15 +211,10 @@ export default function ListingFormModal({
                   required
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="field"
                 />
-              </div>
 
-              <div>
-                <label htmlFor="listing-stock" className="mb-1.5 block text-sm text-soil/70">
-                  Stock on hand
-                </label>
-                <input
+              <FieldInput
+                  label="Stock on hand"
                   id="listing-stock"
                   type="number"
                   min="0"
@@ -251,36 +222,32 @@ export default function ListingFormModal({
                   required
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
-                  className="field"
                 />
-              </div>
             </div>
           </>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="equip-category" className="mb-1.5 block text-sm text-soil/70">
-                Type
-              </label>
-              <select
+              <FieldInput
+                label="Type"
                 id="equip-category"
+                asChild
                 value={equipCategory}
                 onChange={(e) => setEquipCategory(e.target.value)}
-                className="field"
               >
-                {EQUIPMENT_CATEGORIES.map((option) => (
-                  <option key={option} value={option}>
-                    {humanize(option)}
-                  </option>
-                ))}
-              </select>
+                <select>
+                  {EQUIPMENT_CATEGORIES.map((option) => (
+                    <option key={option} value={option}>
+                      {humanize(option)}
+                    </option>
+                  ))}
+                </select>
+              </FieldInput>
             </div>
 
             <div>
-              <label htmlFor="equip-price" className="mb-1.5 block text-sm text-soil/70">
-                {listingType === 'rent' ? 'Daily rate' : 'Sale price'}
-              </label>
-              <input
+              <FieldInput
+                label={listingType === 'rent' ? 'Daily rate' : 'Sale price'}
                 id="equip-price"
                 type="number"
                 min="0"
@@ -289,29 +256,26 @@ export default function ListingFormModal({
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="field"
               />
             </div>
           </div>
         )}
 
-        <div>
-          <label htmlFor="listing-desc" className="mb-1.5 block text-sm text-soil/70">
-            Description
-          </label>
-          <textarea
-            id="listing-desc"
-            rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder={
-              kind === 'products'
-                ? 'Variety, when it was picked, how it travels.'
-                : 'Condition, horsepower, whether an operator comes with it.'
-            }
-            className="field resize-none"
-          />
-        </div>
+        <FieldInput
+          label="Description"
+          id="listing-desc"
+          asChild
+          rows={3}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder={
+            kind === 'products'
+              ? 'Variety, when it was picked, how it travels.'
+              : 'Condition, horsepower, whether an operator comes with it.'
+          }
+        >
+          <textarea className="resize-none" />
+        </FieldInput>
 
         <div>
           <span className="mb-1.5 block text-sm text-soil/70">Photos</span>
