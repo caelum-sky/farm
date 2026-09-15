@@ -28,11 +28,11 @@ export default {
         bark: '#7A5C3E',
         clay: '#8C3A22',
         // Dark mode variants
-        'dark-soil': '#F8F3E6',
+        'dark-soil': '#1E2A1B',
         'dark-canopy': '#2F5D3A',
         'dark-leaf': '#6FA042',
         'dark-sprout': '#C8DDB0',
-        'dark-husk': '#1E2A1B',
+        'dark-husk': '#F8F3E6',
         'dark-husk2': '#EFE7D3',
         'dark-harvest': '#E0A21C',
         'dark-bark': '#7A5C3E',

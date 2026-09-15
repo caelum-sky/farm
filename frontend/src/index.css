@@ -104,15 +104,6 @@
            shadow-[0_2px_6px-_rgba(30,_42,_27,_0.15)] transform-gpu hover:scale-[1.01] active:scale-[0.99];
   }
 
-  .btn-outline {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-canopy/45
-           bg-transparent px-6 py-3 font-medium text-canopy transition duration-300 ease-grow
-           hover:border-canopy hover:bg-canopy/10 sm:px-7 sm:py-3.5
-           motion-safe:hover:scale-[1.03] motion-safe:focus-visible:scale-[1.03]
-           active:scale-100 disabled:opacity-50
-           dark:border-canopy/60 dark:hover:border-canopy/60 dark:hover:bg-canopy/20 dark:text-leaf;
-  }
-
   .btn-quiet {
     @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-full px-4 py-2 text-sm
            font-medium text-soil/70 transition hover:bg-soil/5 hover:text-soil dark:text-husk/70 dark:hover:bg-husk/5 dark:hover:text-husk;
@@ -121,7 +112,7 @@
   .btn-danger {
     @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-clay px-6 py-3
            font-medium text-husk transition duration-300 ease-grow hover:bg-[#763019]
-           dark:hover:bg-[#763019] dark:text-husk;
+           dark:bg-clay/80 dark:text-husk/90 dark:hover:bg-[#763019]/90;
   }
 
   .field {
