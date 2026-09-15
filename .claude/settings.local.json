@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rtk lint *)"
+      "Bash(rtk lint *)",
+      "Bash(rtk npm *)",
+      "Bash(rtk ls *)",
+      "Bash(node *)"
     ]
   }
 }
