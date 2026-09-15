@@ -32,11 +32,11 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
     <motion.div
       initial={false}
       whileHover={{
-        scale: 1.05,
-        y: -5,
+        scale: reduceMotion ? 1 : 1.05,
+        y: reduceMotion ? 0 : -5,
         transition: { type: "spring", stiffness: 300, damping: 20 }
       }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: reduceMotion ? 1 : 0.95 }}
       className="group overflow-hidden"
     >
       <Card className="transition duration-500 ease-grow hover:-translate-y-1 hover:shadow-lift">

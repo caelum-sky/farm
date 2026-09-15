@@ -1,10 +1,6 @@
 // Reusable motion variants for consistent animations across the app
 
-import { useReducedMotion } from '@/hooks/useReducedMotion';
-
-export const fadeIn = (direction: "up" | "down" | "left" | "right" = "up", delay: number = 0) => {
-  const reduceMotion = useReducedMotion();
-
+export const fadeIn = (direction: "up" | "down" | "left" | "right" = "up", delay: number = 0, reduceMotion: boolean = false) => {
   if (reduceMotion) {
     return {
       initial: false,
@@ -14,7 +10,7 @@ export const fadeIn = (direction: "up" | "down" | "left" | "right" = "up", delay
     };
   }
 
-  let initial: any = {};
+  let initial: { opacity: number; x?: number; y?: number };
   switch (direction) {
     case "up":
       initial = { opacity: 0, y: 20 };
@@ -42,9 +38,7 @@ export const fadeIn = (direction: "up" | "down" | "left" | "right" = "up", delay
   };
 };
 
-export const staggerContainer = (staggerChildren: number = 0.05, delayChildren: number = 0) => {
-  const reduceMotion = useReducedMotion();
-
+export const staggerContainer = (staggerChildren: number = 0.05, delayChildren: number = 0, reduceMotion: boolean = false) => {
   return {
     hidden: {},
     show: {

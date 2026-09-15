@@ -3,7 +3,7 @@
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Query
 
 from dependencies import get_db, require_admin
 
@@ -24,7 +24,7 @@ def _day_key(dt: datetime) -> str:
 
 
 @router.get("/overview")
-def overview(admin=Depends(require_admin), days: int = Query(30, ge=1, le=365)) -> dict:
+def overview(admin=require_admin(), days: int = Query(30, ge=1, le=365)) -> dict:
     """Headline numbers for the dashboard cards, scoped to a trailing window."""
     db = get_db()
     since = datetime.now(timezone.utc) - timedelta(days=days)
@@ -56,7 +56,7 @@ def overview(admin=Depends(require_admin), days: int = Query(30, ge=1, le=365)) 
 
 
 @router.get("/sales-trend")
-def sales_trend(admin=Depends(require_admin), days: int = Query(30, ge=7, le=180)) -> dict:
+def sales_trend(admin=require_admin(), days: int = Query(30, ge=7, le=180)) -> dict:
     """Daily produce sales and rental revenue, zero-filled so charts don't gap."""
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -97,7 +97,7 @@ def sales_trend(admin=Depends(require_admin), days: int = Query(30, ge=7, le=180
 
 
 @router.get("/category-mix")
-def category_mix(admin=Depends(require_admin)) -> dict:
+def category_mix(admin=require_admin()) -> dict:
     """What's actually selling, by product subcategory — drives stocking advice."""
     db = get_db()
 
@@ -127,7 +127,7 @@ def category_mix(admin=Depends(require_admin)) -> dict:
 
 
 @router.get("/equipment-utilization")
-def equipment_utilization(admin=Depends(require_admin)) -> dict:
+def equipment_utilization(admin=require_admin()) -> dict:
     """Which shared equipment is over- or under-booked, so coops can rebalance."""
     db = get_db()
 
@@ -164,7 +164,7 @@ def equipment_utilization(admin=Depends(require_admin)) -> dict:
 
 
 @router.get("/user-growth")
-def user_growth(admin=Depends(require_admin), days: int = Query(90, ge=7, le=365)) -> dict:
+def user_growth(admin=require_admin(), days: int = Query(90, ge=7, le=365)) -> dict:
     """Cumulative signups per role — shows whether supply or demand side is lagging."""
     db = get_db()
     now = datetime.now(timezone.utc)

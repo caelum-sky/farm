@@ -3,7 +3,20 @@
     "allow": [
       "Bash(rtk ls *)",
       "Bash(rtk find *)",
-      "Bash(rtk grep *)"
+      "Bash(rtk grep *)",
+      "Read(//c//**)",
+      "Bash(python -m py_compile dependencies.py)",
+      "Bash(python -m py_compile routers/analytics.py)",
+      "Bash(rtk git *)",
+      "Bash(rtk lint *)",
+      "Bash(rtk ruff *)",
+      "Bash(pip list *)",
+      "Bash(.venv/Scripts/activate)",
+      "Bash(.venv/Scripts/pip list *)",
+      "Bash(rtk read *)",
+      "Bash(.venv/Scripts/pip install *)",
+      "Bash(.venv/Scripts/ruff *)",
+      "Bash(.venv/Scripts/python *)"
     ]
   }
 }

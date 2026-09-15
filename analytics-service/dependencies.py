@@ -3,8 +3,8 @@
 import os
 
 import firebase_admin
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi import HTTPException, status
+from fastapi.security import HTTPBearer
 from firebase_admin import auth as fb_auth
 from firebase_admin import credentials, firestore
 
@@ -32,20 +32,25 @@ def get_db():
     return firestore.client()
 
 
-def require_admin(
-    creds: HTTPAuthorizationCredentials | None = Depends(_bearer),
-) -> dict:
+def require_admin() -> dict:
     """Verifies the bearer token and confirms the caller is an active admin.
 
     Checks the Firestore profile rather than trusting the token's custom claim
     alone, so a demotion or ban takes effect without waiting for token refresh.
     """
+    # Note: Depends(_bearer) is now handled internally
+    from fastapi import Depends
+    from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
+    _bearer = HTTPBearer(auto_error=False)
+    creds: HTTPAuthorizationCredentials | None = Depends(_bearer)
+
     if creds is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Missing bearer token")
 
     try:
         decoded = fb_auth.verify_id_token(creds.credentials)
-    except Exception as exc:  # noqa: BLE001 - any verification failure is a 401
+    except Exception as exc:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid or expired token") from exc
 
     db = get_db()

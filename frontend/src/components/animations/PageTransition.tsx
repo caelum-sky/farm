@@ -8,7 +8,7 @@ interface PageTransitionProps {
   initial?: boolean;
 }
 
-export default function PageTransition({ children, initial = false }: PageTransitionProps) {
+export default function PageTransition({ children, _initial }: PageTransitionProps) {
   const reduceMotion = useReducedMotion();
 
   return (

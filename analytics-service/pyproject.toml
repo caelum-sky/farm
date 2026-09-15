@@ -1,0 +1,24 @@
+# analytics-service/pyproject.toml
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# B008 flags any function call in an argument default. FastAPI's dependency
+# injection *requires* Depends(...) as a default value — that's how routes
+# receive request-scoped dependencies like the current admin user. Rewriting
+# it "correctly" would break the auth check, so this project disables B008
+# rather than fight the framework. See:
+# https://docs.astral.sh/ruff/rules/function-call-in-default-argument/#fastapi
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+# DTZ001 (naive datetime.datetime()) fires on the test that deliberately
+# builds a naive datetime to verify _as_datetime() correctly localizes it to
+# UTC — the naive value is the fixture, not a bug. Application code outside
+# tests/ still gets the full rule.
+"tests/*" = ["DTZ001"]
+
+[tool.pytest.ini_options]
+# Without this, `import routers.analytics` in the tests fails because pytest
+# doesn't add the project root to sys.path by default in newer versions.
+pythonpath = ["."]

@@ -1,6 +1,6 @@
 // frontend/src/components/ui/Modal.tsx
 import { useEffect, useRef, type ReactNode } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface ModalProps {
