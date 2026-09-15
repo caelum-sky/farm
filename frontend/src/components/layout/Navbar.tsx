@@ -6,7 +6,7 @@ import { Menu, ShoppingBasket, X, Sun, Moon, Monitor } from 'lucide-react';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
-import { useTheme, ThemeMode } from '@/context/ThemeContext';
+import { useTheme, ThemeMode } from '@/context/useTheme';
 
 const PUBLIC_LINKS = [
   { to: '/market', label: 'Produce' },
@@ -22,6 +22,7 @@ export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { mode, setMode } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
