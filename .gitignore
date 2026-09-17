@@ -38,3 +38,6 @@ npm-debug.log*
 # tsc composite output
 frontend/vite.config.js
 frontend/vite.config.d.ts
+
+
+analytics-service/serviceaccountkey.json
