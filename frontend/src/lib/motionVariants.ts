@@ -1,75 +1,42 @@
-// Reusable motion variants for consistent animations across the app
+// frontend/src/lib/motionVariants.ts
+import type { Variants } from 'framer-motion';
 
-export const fadeIn = (direction: "up" | "down" | "left" | "right" = "up", delay: number = 0, reduceMotion: boolean = false) => {
+/**
+ * Plain variant factories — NOT hooks. React Hooks (useReducedMotion included)
+ * can only be called from a component body or from another custom hook (a
+ * function whose name starts with `use`). Calling one inside a helper like
+ * `fadeIn()` breaks the Rules of Hooks and will misbehave at runtime, not
+ * just fail lint — so each caller reads the flag itself with
+ * `useReducedMotion()` and passes the result in here.
+ *
+ *   const reduceMotion = useReducedMotion();
+ *   <motion.div variants={fadeIn(reduceMotion)} initial="hidden" animate="shown" />
+ */
+export function fadeIn(reduceMotion: boolean, distance = 24): Variants {
   if (reduceMotion) {
     return {
-      initial: false,
-      animate: { opacity: 1 },
-      exit: { opacity: 0 },
-      transition: { duration: 0.001 }
+      hidden: { opacity: 1 },
+      shown: { opacity: 1 },
     };
   }
-
-  let initial: { opacity: number; x?: number; y?: number };
-  switch (direction) {
-    case "up":
-      initial = { opacity: 0, y: 20 };
-      break;
-    case "down":
-      initial = { opacity: 0, y: -20 };
-      break;
-    case "left":
-      initial = { opacity: 0, x: -20 };
-      break;
-    case "right":
-      initial = { opacity: 0, x: 20 };
-      break;
-  }
-
   return {
-    initial,
-    animate: { opacity: 1, y: 0, x: 0 },
-    exit: { opacity: 0, y: direction === "up" ? -20 : direction === "down" ? 20 : 0, x: direction === "left" ? -20 : direction === "right" ? 20 : 0 },
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 0.61, 0.36, 1],
-      delay
-    }
+    hidden: { opacity: 0, y: distance },
+    shown: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 0.61, 0.36, 1] },
+    },
   };
-};
+}
 
-export const staggerContainer = (staggerChildren: number = 0.05, delayChildren: number = 0, reduceMotion: boolean = false) => {
+export function staggerContainer(reduceMotion: boolean, stagger = 0.07): Variants {
+  if (reduceMotion) {
+    return { hidden: {}, shown: {} };
+  }
   return {
     hidden: {},
-    show: {
-      transition: {
-        staggerChildren: reduceMotion ? 0 : staggerChildren,
-        delayChildren: delayChildren || 0
-      }
-    }
+    shown: {
+      transition: { staggerChildren: stagger, delayChildren: 0.04 },
+    },
   };
-};
-
-export const cardHover = {
-  initial: false,
-  whileHover: {
-    scale: 1.05,
-    y: -5,
-    transition: { type: "spring", stiffness: 300, damping: 20 }
-  },
-  whileTap: { scale: 0.95 }
-};
-
-export const modalOverlay = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.3 }
-};
-
-export const modalContent = {
-  initial: { opacity: 0, y: 28 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
-  transition: { duration: 0.32, ease: [0.22, 0.61, 0.36, 1] }
-};
+}

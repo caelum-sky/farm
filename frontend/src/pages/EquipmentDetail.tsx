@@ -155,7 +155,10 @@ export default function EquipmentDetail() {
         </div>
 
         <div>
-          <p className="text-sm capitalize text-soil/55">{item.category}</p>
+          <p className="text-sm capitalize text-soil/55">
+            {item.category}
+            {item.ownerName && <span className="normal-case"> · listed by {item.ownerName}</span>}
+          </p>
           <h1 className="mt-2 font-display text-4xl text-soil sm:text-5xl">{item.name}</h1>
 
           <p className="mt-6 font-display text-3xl text-canopy">
@@ -190,7 +193,7 @@ export default function EquipmentDetail() {
                 <p className="mt-2 text-soil/75">
                   The owner reviews requests and confirms availability. Track it under your bookings.
                 </p>
-                <Link to="/rentals" className="btn-primary mt-5">
+                <Link to="/app/rentals" className="btn-primary mt-5">
                   View my bookings
                 </Link>
               </div>

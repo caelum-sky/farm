@@ -132,7 +132,10 @@ export default function ProductDetail() {
         </div>
 
         <div>
-          <p className="text-sm text-soil/55">{humanize(product.subcategory)}</p>
+          <p className="text-sm text-soil/55">
+            {humanize(product.subcategory)}
+            {product.ownerName && <> · sold by {product.ownerName}</>}
+          </p>
           <h1 className="mt-2 font-display text-4xl text-soil sm:text-5xl">{product.name}</h1>
 
           {product.tags.length > 0 && (

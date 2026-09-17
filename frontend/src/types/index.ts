@@ -20,6 +20,7 @@ export interface Product {
   id: string;
   ownerId: string;
   ownerRole: Role;
+  ownerName?: string;
   name: string;
   description: string;
   category: 'produce' | 'supply';
@@ -36,6 +37,7 @@ export interface Equipment {
   id: string;
   ownerId: string;
   ownerRole: Role;
+  ownerName?: string;
   name: string;
   description: string;
   category: string;

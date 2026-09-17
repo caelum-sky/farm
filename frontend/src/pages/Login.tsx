@@ -9,7 +9,7 @@ export default function Login() {
   const { signIn, signInWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string })?.from || '/';
+  const from = (location.state as { from?: string })?.from || '/app';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +60,7 @@ export default function Login() {
 
   return (
     <div className="shell grid place-items-center section-y">
-      <div className="card card-enhanced w-full max-w-md p-8">
+      <div className="card w-full max-w-md p-8">
         <h1 className="font-display text-3xl text-canopy">Welcome back</h1>
         <p className="mt-2 text-sm text-soil/65">Sign in to order, sell, or manage bookings.</p>
 
@@ -76,7 +76,7 @@ export default function Login() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="field field-enhanced"
+              className="field"
             />
           </div>
 
@@ -91,27 +91,27 @@ export default function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="field field-enhanced"
+              className="field"
             />
           </div>
 
           <ErrorNote message={error} />
           {notice && <p className="text-sm text-canopy" role="status">{notice}</p>}
 
-          <button type="submit" disabled={busy} className="btn-primary btn-primary-enhanced w-full">
+          <button type="submit" disabled={busy} className="btn-primary w-full">
             {busy ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
 
-        <button type="button" onClick={google} disabled={busy} className="btn-outline btn-outline-enhanced mt-3 w-full">
+        <button type="button" onClick={google} disabled={busy} className="btn-outline mt-3 w-full">
           Continue with Google
         </button>
 
         <div className="mt-6 flex items-center justify-between text-sm">
-          <button type="button" onClick={forgot} className="link-underline link-underline-enhanced">
+          <button type="button" onClick={forgot} className="link-underline">
             Forgot password
           </button>
-          <Link to="/register" className="link-underline link-underline-enhanced">
+          <Link to="/register" className="link-underline">
             Create an account
           </Link>
         </div>

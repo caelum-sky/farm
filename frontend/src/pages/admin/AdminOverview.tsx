@@ -102,7 +102,12 @@ export default function AdminOverview() {
   ];
 
   return (
-    <section className="space-y-10">
+    <div className="mx-auto max-w-6xl space-y-10">
+      <header>
+        <h1 className="text-section text-canopy">Overview</h1>
+        <p className="mt-2 text-soil/70">Platform counts and 30-day revenue trends.</p>
+      </header>
+
       <ErrorNote message={error} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -191,6 +196,6 @@ export default function AdminOverview() {
           )}
         </>
       )}
-    </section>
+    </div>
   );
 }

@@ -46,8 +46,13 @@ export default function AdminListings() {
   };
 
   return (
-    <section>
-      <div className="scroll-row">
+    <div className="mx-auto max-w-6xl">
+      <header>
+        <h1 className="text-section text-canopy">Listings</h1>
+        <p className="mt-2 text-soil/70">Moderate produce, supplies, and equipment across the platform.</p>
+      </header>
+
+      <div className="mt-8 scroll-row">
         {(['products', 'equipment'] as Kind[]).map((value) => (
           <button
             key={value}
@@ -119,6 +124,6 @@ export default function AdminListings() {
           ))}
         </ul>
       )}
-    </section>
+    </div>
   );
 }

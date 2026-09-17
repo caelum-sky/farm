@@ -73,8 +73,13 @@ export default function AdminTransactions() {
       : ['', 'requested', 'approved', 'active', 'returned', 'cancelled'];
 
   return (
-    <section>
-      <div className="scroll-row">
+    <div className="mx-auto max-w-6xl">
+      <header>
+        <h1 className="text-section text-canopy">Transactions</h1>
+        <p className="mt-2 text-soil/70">Orders and equipment bookings moving through the platform.</p>
+      </header>
+
+      <div className="mt-8 scroll-row">
         {(['orders', 'rentals'] as Tab[]).map((value) => (
           <button
             key={value}
@@ -168,6 +173,6 @@ export default function AdminTransactions() {
           </ul>
         )}
       </div>
-    </section>
+    </div>
   );
 }

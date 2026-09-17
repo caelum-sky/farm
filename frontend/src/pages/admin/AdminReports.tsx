@@ -65,8 +65,13 @@ export default function AdminReports() {
   };
 
   return (
-    <section>
-      <div className="scroll-row">
+    <div className="mx-auto max-w-6xl">
+      <header>
+        <h1 className="text-section text-canopy">Reports</h1>
+        <p className="mt-2 text-soil/70">Flags from members, waiting on a decision.</p>
+      </header>
+
+      <div className="mt-8 scroll-row">
         {FILTERS.map(([value, label]) => (
           <button
             key={value}
@@ -154,6 +159,6 @@ export default function AdminReports() {
           ))}
         </ul>
       )}
-    </section>
+    </div>
   );
 }

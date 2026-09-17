@@ -1,4 +1,10 @@
 # analytics-service/tests/test_analytics_helpers.py
+"""Unit tests for the pure date helpers in routers/analytics.py.
+
+These two functions have no Firestore/Firebase dependency, so they're tested
+directly without mocking — the rest of the module talks to Firestore and is
+covered by the manual smoke test in the README instead.
+"""
 from datetime import datetime, timezone
 
 from routers.analytics import _as_datetime, _day_key

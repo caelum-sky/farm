@@ -1,8 +1,8 @@
 // frontend/src/App.tsx
 import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import PageTransition from '@/components/animations/PageTransition';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
+import AppShell from '@/components/layout/AppShell';
 import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import SiteLayout from '@/components/layout/SiteLayout';
 import Spinner from '@/components/ui/Spinner';
@@ -15,105 +15,109 @@ import Marketplace from '@/pages/Marketplace';
 import NotFound from '@/pages/NotFound';
 import ProductDetail from '@/pages/ProductDetail';
 import Register from '@/pages/Register';
-import Account from '@/pages/dashboard/Account';
-import Orders from '@/pages/dashboard/Orders';
-import Rentals from '@/pages/dashboard/Rentals';
-import SellerDashboard from '@/pages/dashboard/SellerDashboard';
+import Account from '@/pages/app/Account';
+import AppHome from '@/pages/app/AppHome';
+import ManageListings from '@/pages/app/ManageListings';
+import Orders from '@/pages/app/Orders';
+import Rentals from '@/pages/app/Rentals';
 
-// The admin panel pulls in Recharts, which is heavier than the rest of the app
-// combined. Splitting it out keeps that weight off every shopper's first load —
-// only the handful of admins ever download it.
-const AdminLayout = lazy(() => import('@/components/admin/AdminLayout'));
+// The admin section pulls in Recharts, which is heavier than the rest of the
+// app combined. Splitting it out keeps that weight off every shopper's and
+// every farmer's first load — only admins ever download it.
 const AdminOverview = lazy(() => import('@/pages/admin/AdminOverview'));
 const AdminUsers = lazy(() => import('@/pages/admin/AdminUsers'));
 const AdminListings = lazy(() => import('@/pages/admin/AdminListings'));
 const AdminReports = lazy(() => import('@/pages/admin/AdminReports'));
 const AdminTransactions = lazy(() => import('@/pages/admin/AdminTransactions'));
 
+function LazyPage({ children, label }: { children: React.ReactNode; label: string }) {
+  return <Suspense fallback={<Spinner label={label} />}>{children}</Suspense>;
+}
+
 export default function App() {
   return (
-    <PageTransition>
-      <Routes>
-        <Route element={<SiteLayout />}>
-          {/* Public */}
-          <Route path="/" element={<Home />} />
-          <Route path="/market" element={<Marketplace category="produce" />} />
-          <Route path="/market/:id" element={<ProductDetail />} />
-          <Route path="/supplies" element={<Marketplace category="supply" />} />
-          <Route path="/equipment" element={<EquipmentPage />} />
-          <Route path="/equipment/:id" element={<EquipmentDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+    <Routes>
+      {/* Storefront — public marketing + shopping, top nav, footer, leaf animation */}
+      <Route element={<SiteLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/market" element={<Marketplace category="produce" />} />
+        <Route path="/market/:id" element={<ProductDetail />} />
+        <Route path="/supplies" element={<Marketplace category="supply" />} />
+        <Route path="/equipment" element={<EquipmentPage />} />
+        <Route path="/equipment/:id" element={<EquipmentDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
 
-        {/* Any signed-in member */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/account" element={<Account />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/rentals" element={<Rentals />} />
-        </Route>
+      {/* App — everything behind sign-in, sidebar shell, no marketing chrome.
+          One index route dispatches to a different home per role; the rest
+          of the tree is nav items that only some roles ever see (enforced
+          both by the sidebar config and by these route-level role gates). */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/app" element={<AppShell />}>
+          <Route index element={<AppHome />} />
+          <Route path="account" element={<Account />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="rentals" element={<Rentals />} />
 
-        {/* Sellers only */}
-        <Route element={<ProtectedRoute allow={['farmer', 'cooperative', 'admin']} />}>
-          <Route path="/dashboard" element={<SellerDashboard />} />
-        </Route>
+          <Route element={<ProtectedRoute allow={['farmer', 'cooperative', 'admin']} />}>
+            <Route path="listings" element={<ManageListings />} />
+          </Route>
 
-        {/* Admins only */}
-        <Route element={<ProtectedRoute allow={['admin']} />}>
-          <Route
-            path="/admin"
-            element={
-              <Suspense fallback={<Spinner label="Opening the admin panel" />}>
-                <AdminLayout />
-              </Suspense>
-            }
-          >
+          <Route element={<ProtectedRoute allow={['admin']} />}>
             <Route
-              index
+              path="admin"
               element={
-                <Suspense fallback={<Spinner label="Loading dashboard" />}>
+                <LazyPage label="Loading dashboard">
                   <AdminOverview />
-                </Suspense>
+                </LazyPage>
               }
             />
             <Route
-              path="users"
+              path="admin/users"
               element={
-                <Suspense fallback={<Spinner label="Loading users" />}>
+                <LazyPage label="Loading users">
                   <AdminUsers />
-                </Suspense>
+                </LazyPage>
               }
             />
             <Route
-              path="listings"
+              path="admin/listings"
               element={
-                <Suspense fallback={<Spinner label="Loading listings" />}>
+                <LazyPage label="Loading listings">
                   <AdminListings />
-                </Suspense>
+                </LazyPage>
               }
             />
             <Route
-              path="reports"
+              path="admin/reports"
               element={
-                <Suspense fallback={<Spinner label="Loading reports" />}>
+                <LazyPage label="Loading reports">
                   <AdminReports />
-                </Suspense>
+                </LazyPage>
               }
             />
             <Route
-              path="transactions"
+              path="admin/transactions"
               element={
-                <Suspense fallback={<Spinner label="Loading transactions" />}>
+                <LazyPage label="Loading transactions">
                   <AdminTransactions />
-                </Suspense>
+                </LazyPage>
               }
             />
           </Route>
         </Route>
-
-        <Route path="*" element={<NotFound />} />
       </Route>
+
+      {/* Old paths from before the storefront/app split — keep bookmarks and
+          any external links working rather than breaking them silently. */}
+      <Route path="/dashboard" element={<Navigate to="/app/listings" replace />} />
+      <Route path="/admin" element={<Navigate to="/app/admin" replace />} />
+      <Route path="/account" element={<Navigate to="/app/account" replace />} />
+      <Route path="/orders" element={<Navigate to="/app/orders" replace />} />
+      <Route path="/rentals" element={<Navigate to="/app/rentals" replace />} />
     </Routes>
-    </PageTransition>
   );
 }

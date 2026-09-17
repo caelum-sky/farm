@@ -36,7 +36,14 @@ service cloud.firestore {
 
     // ---- users --------------------------------------------------------
     match /users/{userId} {
-      allow read: if isSignedIn();
+      // Nothing in the frontend reads another user's profile via the client
+      // SDK — every screen that shows "who grew this" or an admin user list
+      // goes through the Node API instead, which returns only the safe
+      // fields it chooses to. So a wider read rule here would do nothing but
+      // let anyone who opens devtools and queries Firestore directly (the
+      // web config is public by design; these rules are the only real gate)
+      // pull every user's email and phone number. Own-profile-or-admin only.
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == userId);
       allow create: if isSignedIn() && request.auth.uid == userId;
       // users may edit their own profile fields, but never their own role/status
       allow update: if isAdmin() ||

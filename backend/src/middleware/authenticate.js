@@ -35,6 +35,10 @@ export async function authenticate(req, res, next) {
       email: decoded.email,
       role: userData.role,
       status: userData.status,
+      // Already in hand from the ban check above, so listing/order writes
+      // can denormalize a seller name onto the doc for free — no second read.
+      displayName: userData.displayName,
+      orgName: userData.orgName || null,
     };
 
     next();

@@ -2,11 +2,10 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, ShoppingBasket, X, Sun, Moon, Monitor } from 'lucide-react';
+import { Menu, ShoppingBasket, X } from 'lucide-react';
 
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
-import { useTheme, ThemeMode } from '@/context/useTheme';
 
 const PUBLIC_LINKS = [
   { to: '/market', label: 'Produce' },
@@ -16,13 +15,12 @@ const PUBLIC_LINKS = [
 ];
 
 export default function Navbar() {
-  const { profile, isAdmin, isSeller, logOut } = useAuth();
+  const { profile, logOut } = useAuth();
   const { count } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { mode, setMode } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -57,22 +55,22 @@ export default function Navbar() {
   };
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `text-sm transition-colors ${isActive ? 'text-canopy dark:text-leaf' : 'text-soil/70 hover:text-soil dark:text-husk/70 dark:hover:text-husk'}`;
+    `text-sm transition-colors ${isActive ? 'text-canopy' : 'text-soil/70 hover:text-soil'}`;
 
-  const accountLinks = profile
+  // The storefront's job when signed in is just to hand off to the
+  // dashboard — the role-specific nav (admin tools, seller listings, and so
+  // on) lives in the app shell's own sidebar, not duplicated up here.
+  const mobileAccountLinks = profile
     ? [
-        ...(isAdmin ? [{ to: '/admin', label: 'Admin panel' }] : []),
-        ...(isSeller ? [{ to: '/dashboard', label: 'Seller dashboard' }] : []),
-        { to: '/orders', label: 'Orders' },
-        { to: '/rentals', label: 'Bookings' },
-        { to: '/account', label: 'My account' },
+        { to: '/app', label: 'Dashboard' },
+        { to: '/app/account', label: 'My account' },
       ]
     : [];
 
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ease-grow ${
-        scrolled ? 'bg-husk/92 dark:bg-soil/92 shadow-crate backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'bg-husk/92 shadow-crate backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       {/* z-10 keeps the bar itself painted above the drawer's backdrop, which
@@ -83,13 +81,13 @@ export default function Navbar() {
             <path d="M26 4C13 4 6 11 6 21c0 2 .4 4 1.2 5.7l2.2-2.2C9.1 23.3 9 22.2 9 21c0-8 5.6-13 17-13Z" fill="#2F5D3A" />
             <path d="M26 4c0 13-7 20-17 20 2 2.5 5 4 8 4 7 0 11-6 11-14 0-4-1-8-2-10Z" fill="#6FA042" />
           </svg>
-          <span className="font-display text-xl text-canopy dark:text-leaf">FarmHub</span>
+          <span className="font-display text-xl text-canopy">FarmHub</span>
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
           {PUBLIC_LINKS.map((link) =>
             link.to.includes('#') ? (
-              <a key={link.to} href={link.to} className="text-sm text-soil/70 transition-colors hover:text-soil dark:text-husk/70 dark:hover:text-husk">
+              <a key={link.to} href={link.to} className="text-sm text-soil/70 transition-colors hover:text-soil">
                 {link.label}
               </a>
             ) : (
@@ -98,39 +96,17 @@ export default function Navbar() {
               </NavLink>
             )
           )}
-          {/* Theme toggle */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                const modeOrder: ThemeMode[] = ['system', 'light', 'dark'];
-                const currentIndex = modeOrder.indexOf(mode);
-                const nextIndex = (currentIndex + 1) % modeOrder.length;
-                setMode(modeOrder[nextIndex]);
-              }}
-              aria-label="Toggle theme"
-              className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
-            >
-              {mode === 'system' ? (
-                <Monitor size={20} className="text-soil/80 dark:text-husk/80" />
-              ) : mode === 'light' ? (
-                <Sun size={20} className="text-canopy dark:text-husk" />
-              ) : (
-                <Moon size={20} className="text-canopy dark:text-husk" />
-              )}
-            </button>
-          </div>
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2">
           <Link
             to="/cart"
             aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
-            className="relative grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
+            className="relative grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5"
           >
             <ShoppingBasket size={20} className="text-soil/80" />
             {count > 0 && (
-              <span className="absolute right-0.5 top-1 grid h-5 min-w-5 place-items-center rounded-full bg-harvest px-1 text-[11px] font-semibold text-soil dark:bg-harvest dark:text-husk">
+              <span className="absolute right-0.5 top-1 grid h-5 min-w-5 place-items-center rounded-full bg-harvest px-1 text-[11px] font-semibold text-soil">
                 {count}
               </span>
             )}
@@ -139,18 +115,12 @@ export default function Navbar() {
           <div className="hidden items-center gap-2 lg:flex">
             {profile ? (
               <>
-                {isAdmin && (
-                  <Link to="/admin" className="btn-quiet">
-                    Admin
-                  </Link>
-                )}
-                {isSeller && (
-                  <Link to="/dashboard" className="btn-quiet">
-                    Dashboard
-                  </Link>
-                )}
-                <Link to="/account" className="btn-quiet">
-                  {profile.displayName.split(' ')[0]}
+                <span className="px-2 text-sm text-soil/60">{profile.displayName.split(' ')[0]}</span>
+                <Link
+                  to="/app"
+                  className="rounded-full bg-canopy px-5 py-2.5 text-sm font-medium text-husk transition duration-300 ease-grow hover:bg-leaf motion-safe:hover:scale-105"
+                >
+                  Dashboard
                 </Link>
                 <button type="button" onClick={handleSignOut} className="btn-quiet">
                   Sign out
@@ -163,7 +133,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="rounded-full bg-canopy px-5 py-2.5 text-sm font-medium text-husk transition duration-300 ease-grow hover:bg-leaf motion-safe:hover:scale-105 dark:bg-leaf dark:hover:bg-leaf dark:text-husk"
+                  className="rounded-full bg-canopy px-5 py-2.5 text-sm font-medium text-husk transition duration-300 ease-grow hover:bg-leaf motion-safe:hover:scale-105"
                 >
                   Join FarmHub
                 </Link>
@@ -176,7 +146,7 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            className="grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full transition hover:bg-soil/5 lg:hidden"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -195,7 +165,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-0 cursor-default bg-soil/40 dark:bg-husk/40 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-0 cursor-default bg-soil/40 backdrop-blur-sm lg:hidden"
             />
 
             <motion.div
@@ -206,38 +176,15 @@ export default function Navbar() {
               transition={{ duration: 0.34, ease: [0.22, 0.61, 0.36, 1] }}
               /* Anchored to the header rather than a fixed offset, so a banner
                  above the nav can't push the bar underneath the drawer. */
-              className="absolute inset-x-0 top-full z-10 max-h-[72dvh] overflow-y-auto border-t border-soil/10 bg-husk px-5 pb-8 pt-4 shadow-crate dark:border-husk/10 dark:bg-husk/20 lg:hidden"
+              className="absolute inset-x-0 top-full z-10 max-h-[72dvh] overflow-y-auto border-t border-soil/10 bg-husk px-5 pb-8 pt-4 shadow-crate lg:hidden"
             >
               <div className="flex flex-col gap-1">
-                {/* Theme toggle in mobile menu */}
-                <div className="flex items-center gap-2 px-3 py-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const modeOrder: ThemeMode[] = ['system', 'light', 'dark'];
-                      const currentIndex = modeOrder.indexOf(mode);
-                      const nextIndex = (currentIndex + 1) % modeOrder.length;
-                      setMode(modeOrder[nextIndex]);
-                    }}
-                    aria-label="Toggle theme"
-                    className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-soil/5 dark:hover:bg-husk/5"
-                  >
-                    {mode === 'system' ? (
-                      <Monitor size={20} className="text-soil/80 dark:text-husk/80" />
-                    ) : mode === 'light' ? (
-                      <Sun size={20} className="text-canopy dark:text-husk" />
-                    ) : (
-                      <Moon size={20} className="text-canopy dark:text-husk" />
-                    )}
-                  </button>
-                </div>
-
                 {PUBLIC_LINKS.map((link) => (
                   <a
                     key={link.to}
                     href={link.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5 dark:text-husk/85 dark:hover:bg-husk/5"
+                    className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5"
                   >
                     {link.label}
                   </a>
@@ -247,12 +194,12 @@ export default function Navbar() {
 
                 {profile ? (
                   <>
-                    {accountLinks.map((link) => (
+                    {mobileAccountLinks.map((link) => (
                       <Link
                         key={link.to}
                         to={link.to}
                         onClick={() => setOpen(false)}
-                        className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5 dark:text-husk/85 dark:hover:bg-husk/5"
+                        className="rounded-xl px-3 py-3 text-soil/85 transition hover:bg-soil/5"
                       >
                         {link.label}
                       </Link>

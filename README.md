@@ -143,29 +143,3 @@ Firestore security rules, CI/CD, animated marketing homepage.
 Good next steps (say "continue" and pick one): Stripe/PayMongo payment capture on
 checkout, image upload pipeline (signed URLs to Storage), email notifications,
 in-app messaging between buyer and seller, the Expo mobile client.
-
-## Deployment Secrets
-
-To enable CI/CD pipelines to deploy to Render and Firebase Hosting, the following GitHub repository secrets must be set:
-
-### Frontend Build (GitHub Actions)
-- `VITE_API_URL`: Base URL of the backend API (e.g., `https://farmhub-api.onrender.com`)
-- `VITE_FIREBASE_API_KEY`: Firebase Web API key
-- `VITE_FIREBASE_AUTH_DOMAIN`: Firebase Auth domain (e.g., `farmhub.firebaseapp.com`)
-- `VITE_FIREBASE_PROJECT_ID`: Firebase project ID
-- `VITE_FIREBASE_STORAGE_BUCKET`: Firebase Storage bucket (e.g., `farmhub.appspot.com`)
-- `VITE_FIREBASE_MESSAGING_SENDER_ID`: Firebase messaging sender ID
-- `VITE_FIREBASE_APP_ID`: Firebase App ID
-- `FIREBASE_SERVICE_ACCOUNT`: JSON contents of a Firebase service account key (for deploying to Firebase Hosting)
-
-### Backend & Analytics Services (Render)
-These variables must be set in the Render dashboard for each service (backend and analytics) **or** can be injected via GitHub Actions if you prefer (though Render recommends setting them in the dashboard):
-- `FIREBASE_PROJECT_ID`: Firebase project ID
-- `FIREBASE_CLIENT_EMAIL`: Firebase service account email
-- `FIREBASE_PRIVATE_KEY`: Firebase service account private key (with newlines)
-- `CORS_ORIGIN`: Comma-separated list of allowed origins (e.g., `https://farmhub.firebaseapp.com,http://localhost:5173`)
-- `NODE_ENV`: Set to `production` for the backend service (not required for analytics)
-
-### Render Webhook Triggers (GitHub Actions)
-- `RENDER_BACKEND_DEPLOY_HOOK`: Deploy hook URL for the backend service on Render
-- `RENDER_ANALYTICS_DEPLOY_HOOK`: Deploy hook URL for the analytics service on Render

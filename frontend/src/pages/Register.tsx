@@ -57,7 +57,7 @@ export default function Register() {
         phone: phone || undefined,
         orgName: role === 'cooperative' ? orgName : undefined,
       });
-      navigate(role === 'buyer' ? '/market' : '/dashboard', { replace: true });
+      navigate('/app', { replace: true });
     } catch (err) {
       if (err instanceof ApiError) {
         setError(err.message);

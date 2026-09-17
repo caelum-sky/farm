@@ -1,3 +1,5 @@
+# analytics-service/dependencies.py
+"""Firebase Admin bootstrap and the admin-only auth dependency."""
 import os
 
 import firebase_admin
@@ -10,12 +12,9 @@ _bearer = HTTPBearer(auto_error=False)
 
 
 def _init_app() -> None:
-    """Initialize Firebase Admin exactly once."""
     if firebase_admin._apps:
         return
-
     private_key = os.getenv("FIREBASE_PRIVATE_KEY", "").replace("\\n", "\n")
-
     cred = credentials.Certificate(
         {
             "type": "service_account",
@@ -25,12 +24,10 @@ def _init_app() -> None:
             "token_uri": "https://oauth2.googleapis.com/token",
         }
     )
-
     firebase_admin.initialize_app(cred)
 
 
 def get_db():
-    """Return the Firestore client."""
     _init_app()
     return firestore.client()
 
@@ -38,51 +35,28 @@ def get_db():
 def require_admin(
     creds: HTTPAuthorizationCredentials | None = Depends(_bearer),
 ) -> dict:
-    """Verify the bearer token and confirm that the caller is an active admin.
+    """Verifies the bearer token and confirms the caller is an active admin.
 
-    The Firestore user profile is checked instead of relying only on Firebase
-    custom claims so that demotions and bans take effect immediately.
+    Checks the Firestore profile rather than trusting the token's custom claim
+    alone, so a demotion or ban takes effect without waiting for token refresh.
     """
-
     if creds is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Missing bearer token",
-        )
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Missing bearer token")
 
     try:
         decoded = fb_auth.verify_id_token(creds.credentials)
     except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or expired token",
-        ) from exc
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid or expired token") from exc
 
     db = get_db()
-
     snap = db.collection("users").document(decoded["uid"]).get()
-
     if not snap.exists:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Account not found",
-        )
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Account not found")
 
-    profile = snap.to_dict() or {}
-
+    profile = snap.to_dict()
     if profile.get("status") == "banned":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="This account has been banned",
-        )
-
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "This account has been banned")
     if profile.get("role") != "admin":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required",
-        )
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Admin access required")
 
-    return {
-        "uid": decoded["uid"],
-        **profile,
-    }
+    return {"uid": decoded["uid"], **profile}

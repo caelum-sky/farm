@@ -101,8 +101,16 @@ export default function AdminUsers() {
   }, [users, search]);
 
   return (
-    <section>
-      <div className="flex flex-wrap gap-3">
+    <div className="mx-auto max-w-6xl">
+      <header>
+        <h1 className="text-section text-canopy">Users</h1>
+        <p className="mt-2 text-soil/70">
+          Change roles, ban, or delete accounts. Bans take effect immediately and end active
+          sessions.
+        </p>
+      </header>
+
+      <div className="mt-8 flex flex-wrap gap-3">
         <div className="relative min-w-0 flex-1 sm:max-w-xs">
           <Search size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-soil/40" />
           <input
@@ -251,6 +259,6 @@ export default function AdminUsers() {
           </div>
         </Modal>
       )}
-    </section>
+    </div>
   );
 }

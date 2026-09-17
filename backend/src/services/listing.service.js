@@ -21,12 +21,20 @@ export async function listListings(collection, filters = {}) {
     minPrice,
     maxPrice,
     sort = 'newest',
-    status = 'active',
+    status,
     limit = 24,
     cursor,
   } = filters;
 
-  let query = ref(collection).where('status', '==', status);
+  // Public browsing only ever wants active listings, so that's the default.
+  // A seller viewing their own dashboard needs to see everything they own —
+  // pending and removed included — so the default only kicks in when there's
+  // no owner filter; pass status explicitly (as admin moderation does) to
+  // override this either way.
+  const effectiveStatus = status || (ownerId ? undefined : 'active');
+
+  let query = ref(collection);
+  if (effectiveStatus) query = query.where('status', '==', effectiveStatus);
   if (category) query = query.where('category', '==', category);
   if (subcategory) query = query.where('subcategory', '==', subcategory);
   if (listingType) query = query.where('listingType', '==', listingType);
@@ -74,6 +82,12 @@ export async function createListing(collection, user, payload) {
     ...payload,
     ownerId: user.uid,
     ownerRole: user.role,
+    // Denormalized at write time rather than joined at read time — the
+    // users collection is locked to owner-or-admin reads (it holds email and
+    // phone), so this is how a buyer sees who's selling without that being
+    // reopened. A later name change won't retroactively update old listings;
+    // that's an acceptable, common trade-off for this pattern.
+    ownerName: user.orgName || user.displayName,
     status: 'active',
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
