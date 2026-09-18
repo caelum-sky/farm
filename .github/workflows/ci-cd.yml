@@ -86,8 +86,12 @@ jobs:
         with:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FARMHUB_C057B }}
 
-      - name: Deploy Firestore and Storage rules
-        run: npx firebase-tools@latest deploy --only firestore:rules,firestore:indexes,storage --project "${{ secrets.FIREBASE_PROJECT_ID }}"
+      # Storage deployment is intentionally separate: this service account can
+      # deploy Hosting and Firestore but does not have default-bucket access.
+      # Grant it Firebase Storage Admin (and provision the default bucket) before
+      # adding `storage` back to this command.
+      - name: Deploy Firestore rules and indexes
+        run: npx firebase-tools@latest deploy --only firestore:rules,firestore:indexes --project "${{ secrets.FIREBASE_PROJECT_ID }}"
 
 
       - uses: actions/download-artifact@v4
