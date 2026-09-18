@@ -56,9 +56,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const loadProfile = useCallback(async () => {
+  const loadProfile = useCallback(async (user: User | null = auth?.currentUser ?? null) => {
+    if (!user) {
+      setProfile(null);
+      return;
+    }
+
     try {
-      setProfile(await api.get<UserProfile>('/auth/me'));
+      // Use the user supplied by Firebase's auth-state callback rather than
+      // reading auth.currentUser again. During session restoration the latter
+      // can briefly be null, which sent /auth/me without a bearer token.
+      const token = await user.getIdToken(true);
+      setProfile(
+        await api.get<UserProfile>('/auth/me', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+      );
     } catch (err) {
       // A banned or deleted account can still hold a valid token briefly.
       if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {
@@ -78,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
       if (user) {
-        await loadProfile();
+        await loadProfile(user);
       } else {
         setProfile(null);
       }
