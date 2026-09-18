@@ -9,9 +9,13 @@ import { useAuth } from '@/context/AuthContext';
 import { api, peso, query } from '@/lib/api';
 import type { Equipment, Paginated, Product, Rental } from '@/types';
 
-export default function SellerHome() {
+interface SellerHomeProps {
+  audience: 'farmer' | 'cooperative';
+}
+
+export default function SellerHome({ audience }: SellerHomeProps) {
   const { profile } = useAuth();
-  const isCoop = profile?.role === 'cooperative';
+  const isCoop = audience === 'cooperative';
 
   const [products, setProducts] = useState<Product[]>([]);
   const [equipment, setEquipment] = useState<Equipment[]>([]);
@@ -54,13 +58,14 @@ export default function SellerHome() {
 
   return (
     <div>
-      <h1 className="text-section text-canopy">
-        {profile?.orgName || profile?.displayName}
-      </h1>
+      <p className="text-sm font-medium uppercase tracking-[0.16em] text-canopy/70">
+        {isCoop ? 'Cooperative workspace' : 'Farm workspace'}
+      </p>
+      <h1 className="mt-2 text-section text-canopy">{profile?.orgName || profile?.displayName}</h1>
       <p className="mt-2 max-w-xl text-soil/70">
         {isCoop
-          ? 'Manage member supplies, the shared equipment pool, and booking requests.'
-          : 'Manage what you sell and the machines you rent out.'}
+          ? 'Manage shared inventory, the equipment pool, and member booking requests.'
+          : 'Plan your harvest, manage listings, and respond to buyer requests.'}
       </p>
 
       <ErrorNote message={error} />
@@ -71,8 +76,8 @@ export default function SellerHome() {
         </div>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <StatCard icon={Package} label="Active listings" value={activeListings} />
-          <StatCard icon={Package} label="Equipment listed" value={activeEquipment} />
+          <StatCard icon={Package} label={isCoop ? 'Active inventory' : 'Active harvest listings'} value={activeListings} />
+          <StatCard icon={Package} label={isCoop ? 'Pool equipment' : 'Equipment listed'} value={activeEquipment} />
           <StatCard
             icon={CalendarClock}
             label="Booking requests"
@@ -88,7 +93,7 @@ export default function SellerHome() {
           className="card flex items-center justify-between p-6 transition duration-300 ease-grow hover:-translate-y-0.5 hover:shadow-lift"
         >
           <div>
-            <h2 className="font-display text-xl text-soil">Add a listing</h2>
+            <h2 className="font-display text-xl text-soil">{isCoop ? 'Update inventory' : 'Post a harvest'}</h2>
             <p className="mt-1 text-sm text-soil/60">
               {isCoop ? 'Post supplies or shared equipment' : 'Post produce or equipment to rent out'}
             </p>

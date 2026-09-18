@@ -32,12 +32,19 @@ export function navForRole(role: Role): NavItem[] {
 
   switch (role) {
     case 'farmer':
-    case 'cooperative':
       return [
-        { to: '/app', label: 'Overview', icon: LayoutDashboard, end: true },
+        { to: '/app/farmer', label: 'Farm overview', icon: LayoutDashboard, end: true },
         { to: '/app/listings', label: 'My Listings', icon: Package },
         { to: '/app/orders', label: 'Orders', icon: ShoppingBag },
         { to: '/app/rentals', label: 'Bookings', icon: Tractor },
+        account,
+      ];
+    case 'cooperative':
+      return [
+        { to: '/app/cooperative', label: 'Co-op overview', icon: LayoutDashboard, end: true },
+        { to: '/app/listings', label: 'Inventory', icon: Package },
+        { to: '/app/orders', label: 'Member sales', icon: ShoppingBag },
+        { to: '/app/rentals', label: 'Equipment pool', icon: Tractor },
         account,
       ];
     case 'admin':
@@ -51,7 +58,7 @@ export function navForRole(role: Role): NavItem[] {
       ];
     default: // buyer
       return [
-        { to: '/app', label: 'Overview', icon: LayoutDashboard, end: true },
+        { to: '/app/buyer', label: 'My overview', icon: LayoutDashboard, end: true },
         { to: '/app/orders', label: 'My Orders', icon: ShoppingBag },
         { to: '/app/rentals', label: 'My Bookings', icon: Tractor },
         account,

@@ -17,6 +17,9 @@ import ProductDetail from '@/pages/ProductDetail';
 import Register from '@/pages/Register';
 import Account from '@/pages/app/Account';
 import AppHome from '@/pages/app/AppHome';
+import BuyerHome from '@/pages/app/BuyerHome';
+import CooperativeHome from '@/pages/app/CooperativeHome';
+import FarmerHome from '@/pages/app/FarmerHome';
 import ManageListings from '@/pages/app/ManageListings';
 import Orders from '@/pages/app/Orders';
 import Rentals from '@/pages/app/Rentals';
@@ -61,6 +64,16 @@ export default function App() {
           <Route path="account" element={<Account />} />
           <Route path="orders" element={<Orders />} />
           <Route path="rentals" element={<Rentals />} />
+
+          <Route element={<ProtectedRoute allow={['buyer']} />}>
+            <Route path="buyer" element={<BuyerHome />} />
+          </Route>
+          <Route element={<ProtectedRoute allow={['farmer']} />}>
+            <Route path="farmer" element={<FarmerHome />} />
+          </Route>
+          <Route element={<ProtectedRoute allow={['cooperative']} />}>
+            <Route path="cooperative" element={<CooperativeHome />} />
+          </Route>
 
           <Route element={<ProtectedRoute allow={['farmer', 'cooperative', 'admin']} />}>
             <Route path="listings" element={<ManageListings />} />

@@ -28,7 +28,9 @@ export default function Cart() {
       });
       clear();
       notify('Order placed');
-      navigate(`/orders?placed=${order.id}`);
+      // Use the current app route directly so the placement reference survives
+      // navigation; the legacy /orders redirect intentionally has no query.
+      navigate(`/app/orders?placed=${order.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not place the order');
     } finally {

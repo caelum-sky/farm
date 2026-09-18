@@ -82,6 +82,17 @@ export default function ListingFormModal({
     setBusy(true);
     setError('');
 
+    if (!Number.isFinite(Number(price)) || Number(price) < 0) {
+      setError('Enter a valid price of zero or more.');
+      setBusy(false);
+      return;
+    }
+    if (kind === 'products' && (!Number.isFinite(Number(stock)) || Number(stock) < 0)) {
+      setError('Enter a valid stock quantity of zero or more.');
+      setBusy(false);
+      return;
+    }
+
     try {
       const payload =
         kind === 'products'
@@ -348,7 +359,7 @@ export default function ListingFormModal({
 
         <ErrorNote message={error} />
 
-        <div className="flex flex-wrap gap-3 pt-1">
+        <div className="sticky bottom-0 -mx-5 mt-2 flex flex-wrap gap-3 border-t border-soil/10 bg-husk px-5 pb-1 pt-4 sm:-mx-7 sm:px-7">
           <button type="submit" disabled={busy} className="btn-primary">
             {busy ? 'Saving…' : isEdit ? 'Save changes' : 'Publish listing'}
           </button>

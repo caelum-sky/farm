@@ -2,8 +2,6 @@
 import { Navigate } from 'react-router-dom';
 
 import { useAuth } from '@/context/AuthContext';
-import BuyerHome from '@/pages/app/BuyerHome';
-import SellerHome from '@/pages/app/SellerHome';
 
 /**
  * `/app` renders a different screen per role rather than one generic
@@ -16,11 +14,12 @@ export default function AppHome() {
 
   switch (profile.role) {
     case 'farmer':
+      return <Navigate to="/app/farmer" replace />;
     case 'cooperative':
-      return <SellerHome />;
+      return <Navigate to="/app/cooperative" replace />;
     case 'admin':
       return <Navigate to="/app/admin" replace />;
     default:
-      return <BuyerHome />;
+      return <Navigate to="/app/buyer" replace />;
   }
 }

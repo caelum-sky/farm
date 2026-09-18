@@ -1,5 +1,5 @@
 // frontend/src/components/ui/Modal.tsx
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -18,6 +18,7 @@ interface ModalProps {
  */
 export default function Modal({ title, onClose, children, size = 'md' }: ModalProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const titleId = useId();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -25,7 +26,26 @@ export default function Modal({ title, onClose, children, size = 'md' }: ModalPr
     panelRef.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const focusable = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', onKeyDown);
 
@@ -38,7 +58,7 @@ export default function Modal({ title, onClose, children, size = 'md' }: ModalPr
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-end justify-center bg-soil/50 backdrop-blur-sm sm:items-center sm:p-5"
+      className="fixed inset-0 z-[70] flex items-end justify-center bg-soil/70 p-2 backdrop-blur-md sm:items-center sm:p-5"
       role="presentation"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
@@ -49,16 +69,16 @@ export default function Modal({ title, onClose, children, size = 'md' }: ModalPr
         tabIndex={-1}
         role="dialog"
         aria-modal="true"
-        aria-label={title}
+        aria-labelledby={titleId}
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.32, ease: [0.22, 0.61, 0.36, 1] }}
-        className={`max-h-[92dvh] w-full overflow-y-auto rounded-t-pod bg-husk p-6 shadow-lift outline-none sm:rounded-pod sm:p-7 ${
+        className={`max-h-[calc(100dvh-1rem)] w-full overflow-y-auto rounded-pod border border-husk/40 bg-husk shadow-lift outline-none sm:max-h-[90dvh] ${
           size === 'lg' ? 'sm:max-w-2xl' : 'sm:max-w-lg'
         }`}
       >
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <h2 className="font-display text-2xl text-soil">{title}</h2>
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-soil/10 bg-husk px-5 py-4 sm:px-7 sm:py-5">
+          <h2 id={titleId} className="font-display text-2xl text-soil">{title}</h2>
           <button
             type="button"
             onClick={onClose}
@@ -69,7 +89,7 @@ export default function Modal({ title, onClose, children, size = 'md' }: ModalPr
           </button>
         </div>
 
-        {children}
+        <div className="p-5 sm:p-7">{children}</div>
       </motion.div>
     </div>
   );
