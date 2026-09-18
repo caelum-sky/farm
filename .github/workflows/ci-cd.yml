@@ -79,10 +79,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Trigger Render deploy — API
-        run: curl -fsS -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
+        run: curl -fsS -X POST "${{ secrets.RENDER_API_DEPLOY_HOOK }}"
 
-      - name: Trigger Render deploy — analytics
-        run: curl -fsS -X POST "${{ secrets.RENDER_ANALYTICS_DEPLOY_HOOK }}"
+
 
       - uses: actions/download-artifact@v4
         with:
